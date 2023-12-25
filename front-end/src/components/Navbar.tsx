@@ -4,9 +4,9 @@ import { useState } from 'react';
 import logo from '../assets/logo.png';
 
 const navItems = [
-    { link: "Overview", path: "home" },
-    { link: "Features", path: "features" },
-    { link: "Pricing", path: "pricing" },
+    { link: "My Daily", path: "daily" },
+    { link: "Bed Time", path: "bedtime" },
+    { link: "Summary", path: "summary" },
     { link: "About", path: "about" },
 ]
 
@@ -23,8 +23,8 @@ const Navbar = () => {
             <nav className='bg-gray-900 text-white py-4 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64 fixed top-0 right-0 left-0'>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center space-x-3'>
-                        <a href="/" className='text-2xl font-semibold flex items-center space-x-3 text-primary'>
-                            <img src={logo} alt="logo" style={{ width: "50px", height: "50px" }} /><span>XYZ</span>
+                        <a href="/" className='text-2xl font-semibold flex items-center space-x-3 text-white'>
+                            <img src={logo} alt="logo" style={{ width: "50px", height: "50px" }} /><span>Life Luminary</span>
                         </a>
                     </div>
                     <ul className='hidden md:flex space-x-12 mx-auto'>
@@ -66,6 +66,8 @@ const Navbar = () => {
                     <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
                 ))}
             </div>
+
+           
         </>
     );
 }
