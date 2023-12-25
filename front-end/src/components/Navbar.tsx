@@ -68,7 +68,29 @@ const Navbar = () => {
                 ))}
             </div>
 
-           {/* generate footer with page links using tail wind css */}
+           {/* generate footer with page links using similar kind of styling as above */}
+            <footer className="footer">
+                <div className="footer-container">
+                    <div className="footer-links">
+                        <ul>
+                            {navItems.map((item, index) => (
+                                <li key={index}>
+                                    <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="footer-social">
+                        <ul>
+                            <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i className="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i className="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i className="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+
 
            
         </>
