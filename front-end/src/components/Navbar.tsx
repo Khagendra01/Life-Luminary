@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import logo from '../assets/logo.png';
 
-const navItems = [
+export const navItems = [
     { link: "My Daily", path: "daily" },
     { link: "Bed Time", path: "bedtime" },
     { link: "Summary", path: "summary" },
     { link: "About", path: "about" },
+    { link: "Need Help?", path: "help" },
 ]
 
 const Navbar = () => {
@@ -66,6 +67,8 @@ const Navbar = () => {
                     <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
                 ))}
             </div>
+
+           {/* generate footer with page links using tail wind css */}
 
            
         </>

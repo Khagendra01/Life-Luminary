@@ -1,9 +1,10 @@
 
 import './App.css'
-import Calendar from './components/Calendar'
+import DailyNote from './components/DailyNote'
 import Footer from './components/Footer'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
+import About from './pages/About'
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
     <>
        <Navbar />
        <Home />
-       <Calendar />
+       <DailyNote />
+       <About />
        <Footer />
     </>
   )
