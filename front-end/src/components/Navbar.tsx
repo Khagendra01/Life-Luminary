@@ -63,33 +63,10 @@ const Navbar = () => {
             </nav>
 
             {/* mobile menu */}
-            <div className={`space-y-4 px-4 pt-24 pb-5 bg-secondary transition-all duration-500 ease-in-out overflow-hidden ${isMenuOpen ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>                {navItems.map((item, index) => (
+            <div className={`space-y-4 px-4 pt-24 pb-5 bg-secondary transition-all duration-500 ease-in-out overflow-hidden ${isMenuOpen ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>                {navItems.map((item) => (
                     <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
                 ))}
             </div>
-
-           {/* generate footer with page links using similar kind of styling as above */}
-            <footer className="footer">
-                <div className="footer-container">
-                    <div className="footer-links">
-                        <ul>
-                            {navItems.map((item, index) => (
-                                <li key={index}>
-                                    <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="footer-social">
-                        <ul>
-                            <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i className="fab fa-instagram"></i></a></li>
-                            <li><a href="#"><i className="fab fa-youtube"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </footer>
 
 
            
