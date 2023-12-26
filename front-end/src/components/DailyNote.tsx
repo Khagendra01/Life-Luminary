@@ -15,7 +15,7 @@ const DailyNote = () => {
 
     return (
         <>
-            <div className='flex flex-col justify-between items-center bg-gray-900 py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48'>
+            <div className='flex flex-col justify-between items-center bg-gray-900 py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48 mt-5'>
                 <div className='flex flex-col items-center text-left space-y-4 calendar-box mb-4'>
                     <h1 className='text-4xl font-semibold text-black'> {month} </h1>
                     <h1 className='text-4xl font-semibold text-black'><FaRegCalendarAlt /></h1>

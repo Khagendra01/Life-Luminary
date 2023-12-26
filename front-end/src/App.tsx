@@ -1,21 +1,15 @@
 
 import './App.css'
-import DailyNote from './components/DailyNote'
-import Footer from './components/Footer'
-import Home from './components/Home'
-import Navbar from './components/Navbar'
-import About from './pages/About'
+
+import RouteConfig from './routes/Routes'
+
 
 function App() {
 
 
   return (
     <>
-       <Navbar />
-       <Home />
-       <DailyNote />
-       <About />
-       <Footer />
+      <RouteConfig />
     </>
   )
 }

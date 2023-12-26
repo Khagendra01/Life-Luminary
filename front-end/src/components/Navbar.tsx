@@ -4,11 +4,11 @@ import { useState } from 'react';
 import logo from '../assets/logo.png';
 
 export const navItems = [
-    { link: "My Daily", path: "daily" },
+    { link: "Feed", path: "Feed" },
     { link: "Bed Time", path: "bedtime" },
     { link: "Summary", path: "summary" },
     { link: "About", path: "about" },
-    { link: "Need Help?", path: "help" },
+    { link: "Contact-Us", path: "contact" },
 ]
 
 const Navbar = () => {
@@ -31,18 +31,13 @@ const Navbar = () => {
                     <ul className='hidden md:flex space-x-12 mx-auto'>
                         {navItems.map((item, index) => (
                             <li key={index}>
-                                <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
+                                <a href={`${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
                             </li>
                         ))}
                     </ul>
                     {/* language and signup */}
                     <div className='hidden md:flex items-center space-x-12'>
                         <button className='bg-primary text-white px-4 py-2 rounded-md'>Sign Up</button>
-                        <select className='bg-primary text-white px-4 py-2 rounded-md'>
-                            <option>English</option>
-                            <option>French</option>
-                            <option>Spanish</option>
-                        </select>
                     </div>
 
                     {/* mobile menu */}
@@ -64,12 +59,14 @@ const Navbar = () => {
 
             {/* mobile menu */}
             <div className={`space-y-4 px-4 pt-24 pb-5 bg-secondary transition-all duration-500 ease-in-out overflow-hidden ${isMenuOpen ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>                {navItems.map((item) => (
-                    <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
-                ))}
+                <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
+            ))}
             </div>
 
-
+            {/* Nice carousel with tailwind css very attractive */}
            
+
+
         </>
     );
 }
