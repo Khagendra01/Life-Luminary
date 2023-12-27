@@ -1,0 +1,23 @@
+.calendar-month {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-day {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-box {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
