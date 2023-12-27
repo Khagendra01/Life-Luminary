@@ -18,3 +18,10 @@
 .carousel-slide.active {
     opacity: 1;
 }
+
+@media (min-width: 768px) { /* Adjust this value to target the screen size you want */
+    .carousel-image {
+      width: 50%;
+      height: auto;
+    }
+  }

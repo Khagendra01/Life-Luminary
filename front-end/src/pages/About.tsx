@@ -22,6 +22,7 @@ const About = () => {
                 </div>
             </div>
 
+
             {/* History Section */}
             <div className='mt-20 bg-gray-800 text-white py-12 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64'>
                 <h2 className='m-4 text-3xl font-semibold'>Our History</h2>
@@ -47,6 +48,7 @@ const About = () => {
                     Donate Now
                 </button>
             </div>
+
 
 
             <Footer />

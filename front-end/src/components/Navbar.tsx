@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import logo from '../assets/logo.png';
 
+import { useNavigate } from 'react-router-dom';
+
 export const navItems = [
     { link: "Feed", path: "Feed" },
     { link: "Bed Time", path: "bedtime" },
@@ -19,9 +21,13 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen);
     }
 
+    const navigate = useNavigate();
+
+    const user = true
+
     return (
         <>
-            <nav className='bg-gray-900 text-white py-4 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64 fixed top-0 right-0 left-0'>
+            <nav className='bg-gradient-to-r from-primary to-secondary  text-white py-4 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64 fixed top-0 right-0 left-0'>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center space-x-3'>
                         <a href="/" className='text-2xl font-semibold flex items-center space-x-3 text-white'>
@@ -35,10 +41,11 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-                    {/* language and signup */}
+
                     <div className='hidden md:flex items-center space-x-12'>
-                        <button className='bg-primary text-white px-4 py-2 rounded-md'>Sign Up</button>
+                        <button onClick={() => navigate('/register')} className='bg-primary text-white px-4 py-2 rounded-md'>Sign Up</button>
                     </div>
+                
 
                     {/* mobile menu */}
                     <div className='md:hidden flex items-center'>
@@ -59,11 +66,14 @@ const Navbar = () => {
 
             {/* mobile menu */}
             <div className={`space-y-4 px-4 pt-24 pb-5 bg-secondary transition-all duration-500 ease-in-out overflow-hidden ${isMenuOpen ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>                {navItems.map((item) => (
-                <a href={`#${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
+                <a href={`${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
             ))}
             </div>
 
-            {/* Nice carousel with tailwind css very attractive */}
+            {/* Register menu with tail wind css */}
+
+           
+
            
 
 

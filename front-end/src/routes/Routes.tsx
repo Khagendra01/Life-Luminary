@@ -6,6 +6,8 @@ import Summary from "../pages/Summary";
 import ContactUs from "../pages/ContactUs";
 import Feed from "../pages/Feed";
 import BedTime from "../pages/BedTime";
+import Register from "../components/Register";
+import Login from "../components/Login";
 
 const RouteConfig = () => {
   return (
@@ -17,6 +19,9 @@ const RouteConfig = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/feed" element={<Feed />} />
         <Route path="/bedtime" element={<BedTime />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
   );

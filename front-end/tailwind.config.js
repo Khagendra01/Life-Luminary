@@ -10,7 +10,8 @@ export default {
         "primary": "#010851",
         "secondary": "#4D7E3E",
         "tartiary": "#707070",
-        "pink": "#EE9AE5"
+        "pink": "#EE9AE5",
+        "tertiary": "#31c48d",
       }
     },
   },

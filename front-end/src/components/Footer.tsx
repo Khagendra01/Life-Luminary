@@ -1,6 +1,8 @@
 
 import { navItems } from "./Navbar";
 
+import '@fortawesome/fontawesome-free/css/all.css';
+
 const Footer = () => {
 
     return (
