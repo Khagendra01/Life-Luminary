@@ -1,6 +1,8 @@
 import instance from "./instance";
 
-function register(registerInfo) {
+import { RegisterInfo, LoginInfo } from "../models/authModel";
+
+function register(registerInfo : RegisterInfo) {
   return instance
     .post("/api/auth/register", registerInfo)
     .then((response) => {
@@ -11,7 +13,7 @@ function register(registerInfo) {
     });
 }
 
-function login(loginInfo) {
+function login(loginInfo : LoginInfo) {
     return instance
       .post("/api/auth/login", loginInfo)
       .then((response) => {
@@ -23,17 +25,5 @@ function login(loginInfo) {
       });
   }
 
-  function refreshLogin()
-  {
-    return instance
-    .get("/api/auth/refresh-login" )
-    .then((response) => {
 
-      return response;
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
-  }
-
-  export {register, refreshLogin, login}
+  export {register, login}

@@ -3,18 +3,16 @@ import Footer from './Footer';
 import { useState } from 'react';
 
 import { register } from "../api/authApi.js"
+import { useNavigate } from 'react-router-dom';
 
-interface RegisterInfo {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
+import { RegisterInfo } from "../models/authModel";
 
 const Register = () => {
 
     const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({ name: "", email: "", password: "", confirmPassword: "" });
     const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
 
     const handleRegisterInfoChange = (name: keyof RegisterInfo, value: string) => {
         setRegisterInfo({ ...registerInfo, [name]: value });
