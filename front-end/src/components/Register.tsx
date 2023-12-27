@@ -2,6 +2,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useState } from 'react';
 
+import { register } from "../api/authApi.js"
+
 interface RegisterInfo {
     name: string;
     email: string;
@@ -18,12 +20,19 @@ const Register = () => {
         setRegisterInfo({ ...registerInfo, [name]: value });
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         if (registerInfo.password !== registerInfo.confirmPassword) {
             setErrorMessage("Passwords do not match!");
         } else {
             setErrorMessage("");
-            // Submit the form
+            await register(registerInfo)
+            .then((res) => {
+                navigate("/login", {state: "Thank you for signing up. Please sign in"})
+            })
+            .catch((error) => {
+              alert(`Sorry ${error.message}`);
+            });
+
         }
     };
 
