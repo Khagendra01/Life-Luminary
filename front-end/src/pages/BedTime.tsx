@@ -51,13 +51,13 @@ const BedTime = () => {
         </div>
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Bedtime Story</div>
-          <p className="mt-2 text-gray-500">{story}</p>
           <button onClick={readStory} className="mt-3 px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-lg">
             <FontAwesomeIcon icon={faVolumeUp} /> Read Story
           </button>
           <button onClick={playMusic} className="mt-3 ml-2 px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-lg">
             <FontAwesomeIcon icon={faVolumeUp} /> Play Music
           </button>
+          <p className="mt-2 text-gray-500">{story}</p>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ const Footer = () => {
                             ))}
                         </ul>
                     </div>
-                    <div className="mb-6 lg:mb-0 lg:w-1/4">
+                    <div className="mb-6 lg:mb-0 lg:w-1/4 lg:mr-10">
                         <h2 className="text-lg font-semibold">Contact Us</h2>
                         <p className="mt-4 text-gray-400">123 Street, City, State, Country</p>
                         <p className="mt-2 text-gray-400">Email: xxxx@yy.com</p>

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export const navItems = [
     { link: "Feed", path: "Feed" },
     { link: "Bed Time", path: "bedtime" },
-    { link: "Summary", path: "summary" },
+    { link: "Activity", path: "activity" },
     { link: "About", path: "about" },
     { link: "Contact-Us", path: "contact" },
 ]
