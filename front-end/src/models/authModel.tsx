@@ -20,3 +20,8 @@ export interface LogInResponse {
     email: string;
     accessToken: string
 }
+
+export interface AuthContextType {
+    user: LogInResponse | null;
+    setUser: React.Dispatch<React.SetStateAction<LogInResponse | null>>;
+  }

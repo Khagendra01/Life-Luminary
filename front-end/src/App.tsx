@@ -1,15 +1,12 @@
-
-import { createContext } from 'vm'
 import './App.css'
 
 import RouteConfig from './routes/Routes'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import { refreshLogin } from './api/authApi';
-import { LogInResponse } from './models/authModel';
+import { AuthContextType, LogInResponse } from './models/authModel';
 
 
-export const AuthContext = createContext();
-
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 function App() {
 
