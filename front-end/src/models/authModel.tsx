@@ -22,8 +22,8 @@ export interface LogInResponse {
 }
 
 export interface AuthContextType {
-    isAuthenticated: boolean;
-    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
     user: LogInResponse | null;
     setUser: React.Dispatch<React.SetStateAction<LogInResponse | null>>;
-  }
+    isLoading: boolean;
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}

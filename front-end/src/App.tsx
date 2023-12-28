@@ -11,15 +11,16 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 function App() {
 
   const [user, setUser] = useState<LogInResponse | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const token = localStorage.getItem("accessToken");
     const getData = async () => {
       await refreshLogin()
         .then((res) => {
           setUser(res);
-          setIsAuthenticated(true)
+          setIsLoading(false);
         })
         .catch(() => {
           setUser(null);
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <>
-    <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       <RouteConfig />
     </AuthContext.Provider>
     </>
