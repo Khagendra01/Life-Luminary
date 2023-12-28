@@ -9,7 +9,7 @@ import { RegisterInfo } from "../models/authModel";
 
 const Register = () => {
 
-    const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({ firstName: "", lastName: "", emailAddress: "", password: "", confirmPassword: "" });
+    const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({ firstName: "", lastName: "", userName: "", email: "", password: "", confirmPassword: "" });
     const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
@@ -23,6 +23,7 @@ const Register = () => {
             setErrorMessage("Passwords do not match!");
         } else {
             setErrorMessage("");
+            console.log(registerInfo)
             await register(registerInfo)
             .then(() => {
                 navigate("/login", {state: "Thank you for signing up. Please sign in"})
@@ -50,8 +51,12 @@ const Register = () => {
                             <input type="text" id="lastName" name="lastName" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={registerInfo.lastName} onChange={(e) => handleRegisterInfoChange(e.target.name as keyof RegisterInfo, e.target.value)} />
                         </div>
                         <div className="space-y-2">
+                            <label htmlFor="name" className="block text-lg font-medium">User Name</label>
+                            <input type="text" id="userName" name="userName" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={registerInfo.userName} onChange={(e) => handleRegisterInfoChange(e.target.name as keyof RegisterInfo, e.target.value)} />
+                        </div>
+                        <div className="space-y-2">
                             <label htmlFor="email" className="block text-lg font-medium">Email</label>
-                            <input type="email" id="emailAddress" name="emailAddress" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={registerInfo.emailAddress} onChange={(e) => handleRegisterInfoChange(e.target.name as keyof RegisterInfo, e.target.value)} />
+                            <input type="email" id="email" name="email" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={registerInfo.email} onChange={(e) => handleRegisterInfoChange(e.target.name as keyof RegisterInfo, e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="password" className="block text-lg font-medium">Password</label>

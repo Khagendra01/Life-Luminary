@@ -1,12 +1,13 @@
 export interface RegisterInfo {
     firstName: string;
     lastName: string;
-    emailAddress: string;
+    userName: string;
+    email: string;
     password: string;
     confirmPassword: string;
 }
 
 export interface LoginInfo {
-    email: string;
+    userName: string;
     password: string;
 }
