@@ -19,7 +19,7 @@ const Login = () => {
     const handleSubmit = async () => {
         try {
             const res = await login(loginInfo);
-           await console.log(res.Result)
+           await console.log(res.request)
            // localStorage.setItem("accessToken", res.accessToken);
             navigate("/profile"); // Navigate to the '/profile' route
         } catch (error) {

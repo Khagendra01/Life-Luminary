@@ -1,6 +1,6 @@
 import instance from "./instance";
 
-import { RegisterInfo, LoginInfo, Response } from "../models/authModel";
+import { RegisterInfo, LoginInfo } from "../models/authModel";
 
 function register(registerInfo : RegisterInfo) {
   return instance
@@ -15,10 +15,9 @@ function register(registerInfo : RegisterInfo) {
 
 function login(loginInfo: LoginInfo) {
   return instance
-    .post<Response>("/api/auth/login", loginInfo)
+    .post("/api/auth/login", loginInfo)
     .then((response) => {
-      const data: Response = response.data;
-      return data;
+      return response
     })
     .catch((error) => {
       throw new Error(error);
