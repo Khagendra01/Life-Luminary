@@ -20,7 +20,7 @@ const Login = () => {
         console.log(loginInfo)
         try {
             const res = await login(loginInfo);
-            console.log(res.data.accessToken)
+            console.log(res.accessToken)
             //localStorage.setItem("accessToken", res.accessToken);
             // Redirect to the dashboard page after signing in
             navigate("/profile"); // Navigate to the '/profile' route
