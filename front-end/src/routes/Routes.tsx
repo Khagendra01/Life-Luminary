@@ -8,8 +8,12 @@ import BedTime from "../pages/BedTime";
 import Register from "../components/Register";
 import Login from "../components/Login";
 import Activity from "../pages/Activity";
+import { useContext } from "react";
+import { AuthContext } from "../App";
 
 const RouteConfig = () => {
+
+  const { user } = useContext(AuthContext);
   return (
     <BrowserRouter>
       <Routes>

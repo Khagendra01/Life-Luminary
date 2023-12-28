@@ -28,18 +28,19 @@ async function login(loginInfo: LoginInfo): Promise<LogInResponse | null> {
   }
 }
 
-
-function refreshLogin()
-{
-  return instance
-  .get("/api/auth/refresh-login" )
-  .then((response) => {
-
-    return response;
-  })
-  .catch((error) => {
-    throw new Error(error);
-  });
+async function refreshLogin(): Promise<LogInResponse | null> {
+  try {
+    const response = await instance.post<LogInResponse>("/api/auth/refresh-login");
+    if (response) {
+      return response as unknown as LogInResponse; // assert the response as LogInResponse
+    } else {
+      console.error("Login failed");
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
   
 
