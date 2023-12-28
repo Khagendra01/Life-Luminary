@@ -1,6 +1,6 @@
 import instance from "./instance";
 
-import { RegisterInfo, LoginInfo, LogInResponse, Response } from "../models/authModel";
+import { RegisterInfo, LoginInfo, LogInResponse } from "../models/authModel";
 
 function register(registerInfo : RegisterInfo) {
   return instance
