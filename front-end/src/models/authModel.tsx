@@ -1,6 +1,7 @@
 export interface RegisterInfo {
-    name: string;
-    email: string;
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
     password: string;
     confirmPassword: string;
 }

@@ -3,6 +3,7 @@ import instance from "./instance";
 import { RegisterInfo, LoginInfo } from "../models/authModel";
 
 function register(registerInfo : RegisterInfo) {
+  alert("ler")
   return instance
     .post("/api/auth/register", registerInfo)
     .then((response) => {
