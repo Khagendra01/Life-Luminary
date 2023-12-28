@@ -30,7 +30,7 @@ async function login(loginInfo: LoginInfo): Promise<LogInResponse | null> {
 
 async function refreshLogin(): Promise<LogInResponse | null> {
   try {
-    const response = await instance.post<LogInResponse>("/api/auth/refresh-login");
+    const response = await instance.get<LogInResponse>("/api/auth/refresh-login");
     if (response) {
       return response as unknown as LogInResponse; // assert the response as LogInResponse
     } else {

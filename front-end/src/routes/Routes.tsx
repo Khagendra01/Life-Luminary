@@ -11,8 +11,9 @@ import Login from "../components/Login";
 import Activity from "../pages/Activity";
 import { AuthContext } from "../App";
 
-const RouteConfig = () => {
-  const { user } = useContext(AuthContext) || {};
+const RouteConfig: React.FC = () => {
+  const { isAuthenticated } = useContext(AuthContext) || {};
+  console.log("I am " + isAuthenticated)
 
   return (
     <BrowserRouter>
@@ -23,8 +24,8 @@ const RouteConfig = () => {
         <Route path="/feed" element={<Feed />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/activity" element={user ? <Activity /> : <Navigate to="/login" />} />
-        <Route path="/bedtime" element={user ? <BedTime /> : <Navigate to="/login" />} />
+        <Route path="/activity" element={isAuthenticated ? <Activity /> : <Navigate to="/login" />} />
+        <Route path="/bedtime" element={isAuthenticated ? <BedTime /> : <Navigate to="/login" />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
