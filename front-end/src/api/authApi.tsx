@@ -27,7 +27,21 @@ async function login(loginInfo: LoginInfo): Promise<LogInResponse | null> {
     return null;
   }
 }
+
+
+function refreshLogin()
+{
+  return instance
+  .get("/api/auth/refresh-login" )
+  .then((response) => {
+
+    return response;
+  })
+  .catch((error) => {
+    throw new Error(error);
+  });
+}
   
 
 
-  export {register, login}
+  export {register, login, refreshLogin}
