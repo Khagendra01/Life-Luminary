@@ -16,20 +16,21 @@ const Login = () => {
         setloginInfo({ ...loginInfo, [name]: value });
     }
 
-    const handleSubmit = async() => {
-        
+    const handleSubmit = async () => {
         try {
             const res = await login(loginInfo);
-            localStorage.setItem("accessToken", res.accessToken);
+            const accessToken = res.data.accessToken; // Access the accessToken from the response data
+            localStorage.setItem("accessToken", accessToken);
             // Redirect to the dashboard page after signing in
-            navigate("/profile"); // Navigate to the '/mainPage' route
-          } catch (error) {
-            //alert(`Sorry ${error.message}`);
-          } finally {
-            //setLoading(false); // Stop loading
-          }
-
+            navigate("/profile"); // Navigate to the '/profile' route
+        } catch (error) {
+            // Handle the error
+            console.error(error);
+        } finally {
+            // Perform any cleanup or additional actions
+            // setLoading(false); // Stop loading
         }
+    };
     
 
     return (
