@@ -1,8 +1,35 @@
+import { useNavigate } from 'react-router-dom';
+import { LoginInfo } from '../models/authModel';
 import Footer from './Footer';
 import Navbar from './Navbar';
+import { useState } from 'react';
+import { login } from '../api/authApi';
 
 const Login = () => {
 
+    const [loginInfo, setloginInfo] = useState<LoginInfo>({ userName: "", password: ""});
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
+
+    const handleloginInfoChange = (name: keyof LoginInfo, value: string) => {
+        setloginInfo({ ...loginInfo, [name]: value });
+    }
+
+    const handleSubmit = async() => {
+        
+        try {
+            const res = await login(loginInfo);
+            localStorage.setItem("accessToken", res.accessToken);
+            // Redirect to the dashboard page after signing in
+            navigate("/profile"); // Navigate to the '/mainPage' route
+          } catch (error) {
+            //alert(`Sorry ${error.message}`);
+          } finally {
+            //setLoading(false); // Stop loading
+          }
+
+        }
     
 
     return (
@@ -13,14 +40,14 @@ const Login = () => {
                 <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
                 <form className="space-y-5">
                     <div className="space-y-2">
-                        <label htmlFor="email" className="block text-lg font-medium">Email</label>
-                        <input type="email" id="email" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <label htmlFor="username" className="block text-lg font-medium">UserName</label>
+                        <input type="text" name="userName"  id="userName" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={loginInfo.userName} onChange={(e) => handleloginInfoChange(e.target.name as keyof LoginInfo, e.target.value)} />
                     </div>
                     <div className="space-y-2">
                         <label htmlFor="password" className="block text-lg font-medium">Password</label>
-                        <input type="password" id="password" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <input type="password" name="password" id="password" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={loginInfo.password} onChange={(e) => handleloginInfoChange(e.target.name as keyof LoginInfo, e.target.value)}/>
                     </div>
-                    <button className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-md">Log In</button>
+                    <button onClick={handleSubmit} className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-md">Log In</button>
                 </form>
             </div>
         </div>

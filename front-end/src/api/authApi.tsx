@@ -25,6 +25,7 @@ function login(loginInfo : LoginInfo) {
         throw new Error(error);
       });
   }
+  
 
 
   export {register, login}
