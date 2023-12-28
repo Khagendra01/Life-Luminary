@@ -15,11 +15,11 @@ function register(registerInfo : RegisterInfo) {
 
 async function login(loginInfo: LoginInfo): Promise<LogInResponse | null> {
   try {
-    const response = await instance.post<Response<LogInResponse>>("/api/auth/login", loginInfo);
-    if (response.data.IsSuccess) {
-      return response.data.Result;
+    const response = await instance.post<LogInResponse>("/api/auth/login", loginInfo);
+    if (response) {
+      return response as unknown as LogInResponse; // assert the response as LogInResponse
     } else {
-      console.error(response.data.Message);
+      console.error("Login failed");
       return null;
     }
   } catch (error) {
