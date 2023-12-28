@@ -13,11 +13,12 @@ function register(registerInfo : RegisterInfo) {
     });
 }
 
-function login(loginInfo: LoginInfo): Promise<LogInResponse> {
+function login(loginInfo: LoginInfo) {
   return instance
     .post("/api/auth/login", loginInfo)
     .then((response) => {
-      return response.data; // Extract the data from the response
+      console.log(response)
+      return response; // Extract the data from the response
     })
     .catch((error) => {
       throw new Error(error);
