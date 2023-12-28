@@ -1,9 +1,8 @@
 import instance from "./instance";
 
-import { RegisterInfo, LoginInfo } from "../models/authModel";
+import { RegisterInfo, LoginInfo, LogInResponse } from "../models/authModel";
 
 function register(registerInfo : RegisterInfo) {
-  alert("ler")
   return instance
     .post("/api/auth/register", registerInfo)
     .then((response) => {
@@ -14,7 +13,7 @@ function register(registerInfo : RegisterInfo) {
     });
 }
 
-function login(loginInfo : LoginInfo) {
+function login(loginInfo : LoginInfo): Promise<LogInResponse> {
     return instance
       .post("/api/auth/login", loginInfo)
       .then((response) => {

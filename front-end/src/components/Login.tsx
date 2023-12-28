@@ -8,7 +8,7 @@ import { login } from '../api/authApi';
 const Login = () => {
 
     const [loginInfo, setloginInfo] = useState<LoginInfo>({ userName: "", password: ""});
-    const [errorMessage, setErrorMessage] = useState("");
+    //const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
 
@@ -17,10 +17,11 @@ const Login = () => {
     }
 
     const handleSubmit = async () => {
+        console.log(loginInfo)
         try {
             const res = await login(loginInfo);
-            const accessToken = res.data.accessToken; // Access the accessToken from the response data
-            localStorage.setItem("accessToken", accessToken);
+            console.log(res)
+            localStorage.setItem("accessToken", res.accessToken);
             // Redirect to the dashboard page after signing in
             navigate("/profile"); // Navigate to the '/profile' route
         } catch (error) {
@@ -39,7 +40,7 @@ const Login = () => {
         <div className="bg-cover bg-center z-50 flex items-center justify-center mt-16">
             <div className="bg-white p-8 rounded-lg shadow-2xl max-w-sm mx-auto">
                 <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
-                <form className="space-y-5">
+                <div className="space-y-5">
                     <div className="space-y-2">
                         <label htmlFor="username" className="block text-lg font-medium">UserName</label>
                         <input type="text" name="userName"  id="userName" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={loginInfo.userName} onChange={(e) => handleloginInfoChange(e.target.name as keyof LoginInfo, e.target.value)} />
@@ -49,7 +50,7 @@ const Login = () => {
                         <input type="password" name="password" id="password" className="w-full border-gray-300 border px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value={loginInfo.password} onChange={(e) => handleloginInfoChange(e.target.name as keyof LoginInfo, e.target.value)}/>
                     </div>
                     <button onClick={handleSubmit} className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-md">Log In</button>
-                </form>
+                </div>
             </div>
         </div>
         <Footer />
