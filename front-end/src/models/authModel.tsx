@@ -21,8 +21,8 @@ export interface LogInResponse {
     accessToken: string
 }
 
-export interface Response {
+export interface Response<T> {
     Message: string;
-    Result: LogInResponse | null;
+    Result: T | null;
     IsSuccess: boolean;
   }
