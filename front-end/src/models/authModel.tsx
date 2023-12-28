@@ -20,3 +20,9 @@ export interface LogInResponse {
     email: string;
     accessToken: string
 }
+
+export interface Response {
+    Message: string;
+    Result: LogInResponse | null;
+    IsSuccess: boolean;
+  }

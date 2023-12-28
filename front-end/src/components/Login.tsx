@@ -17,12 +17,10 @@ const Login = () => {
     }
 
     const handleSubmit = async () => {
-        console.log(loginInfo)
         try {
             const res = await login(loginInfo);
-            console.log(res.accessToken)
-            //localStorage.setItem("accessToken", res.accessToken);
-            // Redirect to the dashboard page after signing in
+           await console.log(res.Result)
+           // localStorage.setItem("accessToken", res.accessToken);
             navigate("/profile"); // Navigate to the '/profile' route
         } catch (error) {
             // Handle the error
