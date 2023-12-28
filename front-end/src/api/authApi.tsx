@@ -13,17 +13,16 @@ function register(registerInfo : RegisterInfo) {
     });
 }
 
-function login(loginInfo : LoginInfo): Promise<LogInResponse> {
-    return instance
-      .post("/api/auth/login", loginInfo)
-      .then((response) => {
-
-        return response;
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
-  }
+function login(loginInfo: LoginInfo): Promise<LogInResponse> {
+  return instance
+    .post("/api/auth/login", loginInfo)
+    .then((response) => {
+      return response.data; // Extract the data from the response
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+}
   
 
 
