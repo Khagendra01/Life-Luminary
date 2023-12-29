@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, ReactNode } from "react";
 
 import About from "../pages/About";
 import Home from "../pages/Home";
@@ -11,15 +11,19 @@ import Login from "../components/Login";
 import Activity from "../pages/Activity";
 import { AuthContext } from "../App";
 
-const PrivateRoute: React.FC<{ path: string, element: React.ReactElement }> = ({ path, element }) => {
+interface RequireAuthProps {
+  children: ReactNode;
+}
+
+function RequireAuth({ children }: RequireAuthProps): JSX.Element {
   const { user, isLoading } = useContext(AuthContext) || {};
 
   if (isLoading) {
     return <div>Loading...</div>; // or your loading component
   }
 
-  return user ? <Route path={path} element={element} /> : <Navigate to="/login" />;
-};
+  return user ? <>{children}</> : <Navigate to="/login" />;
+}
 
 const RouteConfig: React.FC = () => {
   return (
@@ -31,8 +35,8 @@ const RouteConfig: React.FC = () => {
         <Route path="/feed" element={<Feed />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <PrivateRoute path="/activity" element={<Activity />} />
-        <PrivateRoute path="/bedtime" element={<BedTime />} />
+        <Route path="/activity" element={<RequireAuth>{<Activity />}</RequireAuth>} />
+        <Route path="/bedtime" element={<RequireAuth>{<BedTime />}</RequireAuth>} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
