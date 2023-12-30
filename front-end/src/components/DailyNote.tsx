@@ -3,15 +3,15 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 
 import './styles/calendar.css';
+import { useState } from 'react';
 
 const DailyNote = () => {
 
+    const [content, setContent] = useState('');
 
     const today = new Date();
     const month = today.toLocaleString('default', { month: 'long' });
     const day = today.getDate();
-
-
 
     return (
         <>

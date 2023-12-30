@@ -29,11 +29,12 @@ const Navbar = () => {
         <>
             <nav className='bg-gradient-to-r from-primary to-secondary  text-white py-4 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64 fixed top-0 right-0 left-0'>
                 <div className='flex justify-between items-center'>
-                    <div className='flex items-center space-x-3'>
+                    <div className='flex items-center space-x-3 '>
                         <a href="/" className='text-2xl font-semibold flex items-center space-x-3 text-white'>
                             <img src={logo} alt="logo" style={{ width: "50px", height: "50px" }} /><span>Life Luminary</span>
                         </a>
                     </div>
+                    <div>
                     <ul className='hidden md:flex space-x-12 mx-auto'>
                         {navItems.map((item, index) => (
                             <li key={index}>
@@ -41,14 +42,26 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-
-                    <div className='hidden md:flex items-center space-x-12'>
-                        <button onClick={() => navigate('/register')} className='bg-primary text-white px-4 py-2 rounded-md'>Sign Up</button>
                     </div>
-                
+
+                    <div className='hidden md:flex items-center space-x-4'>
+                        <button
+                            onClick={() => navigate('/register')}
+                            className='bg-primary text-white w-24 h-10 rounded-md transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500'
+                        >
+                            Sign Up
+                        </button>
+                        <button
+                            onClick={() => navigate('/login')} 
+                            className='text-white w-24 h-10 px-4 py-2 rounded-md border border-white transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
+                        >
+                            Sign In
+                        </button>
+                    </div>
+
 
                     {/* mobile menu */}
-                    <div className='md:hidden flex items-center'>
+                    <div className='md:hidden flex items-center justify-end'>
                         <button className='mobile-menu-button' onClick={toggleMenu}>
                             {isMenuOpen ? (
                                 <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -72,9 +85,9 @@ const Navbar = () => {
 
             {/* Register menu with tail wind css */}
 
-           
 
-           
+
+
 
 
         </>

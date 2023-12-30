@@ -62,7 +62,7 @@ const Carousel = ({ images }: { images: string[] }) => {
                     <i className="fas fa-chevron-right"></i>
                 </button>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 text-center">
                 <h2 className="text-2xl font-bold transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">One entry each day</h2>
                 <p className="text-gray-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">changes you and people around you!</p>
             </div>
