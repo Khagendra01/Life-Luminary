@@ -5,8 +5,29 @@ export interface PostInfo {
     isNameHidden: boolean;
 }
 
+export interface UserReactRequest {
+    userId: string;
+    postId: string;
+    isGoodJob: boolean;
+    isLove: boolean;   
+}
 export interface UserReact {
     userId: string;
     postId: string;
-    react: boolean;   
+    isGoodJob: boolean;
+    isLove: boolean;   
+}
+
+export interface FeedPosts {
+    id: string;
+    userId: string;
+    content: string;
+    dateTime: string;
+    isNameHidden: boolean;
+    userReactions: UserReact[]
+}
+
+export interface ReactResponse {
+    goodJob: number;
+    love: number;
 }
