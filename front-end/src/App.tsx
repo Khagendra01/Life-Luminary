@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { UserRouteConfig } from "./routes/Routes";
+import { AllRouteConfig, UserRouteConfig } from "./routes/Routes";
 import { useEffect, useState, createContext } from "react";
 import { refreshLogin } from "./api/authApi";
 import { AuthContextType, LogInResponse } from "./models/authModel";
@@ -41,7 +41,11 @@ function App() {
           <UserRouteConfig />
         </AuthContext.Provider>
       ) : (
-        <div>loading</div>
+        <AuthContext.Provider
+        value={{ user, setUser, isLoading, setIsLoading }}
+      >
+        <AllRouteConfig />
+      </AuthContext.Provider>
       )}
     </>
   );
