@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { AllRouteConfig, UserRouteConfig } from "./routes/Routes";
+import { AllRouteConfig } from "./routes/Routes";
 import { useEffect, useState, createContext } from "react";
 import { refreshLogin } from "./api/authApi";
 import { AuthContextType, LogInResponse } from "./models/authModel";
@@ -14,18 +14,18 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoading(true);
     const token = localStorage.getItem("accessToken");
     const getData = async () => {
+      setIsLoading(true);
       await refreshLogin()
         .then((res) => {
           setUser(res);
-          setIsLoading(false);
         })
         .catch(() => {
           setUser(null);
           localStorage.removeItem("accessToken");
         });
+      setIsLoading(false);
     };
     if (token) {
       getData();
@@ -34,18 +34,14 @@ function App() {
 
   return (
     <>
-      {user !== null ? (
+      {user ? (
         <AuthContext.Provider
           value={{ user, setUser, isLoading, setIsLoading }}
         >
-          <UserRouteConfig />
+          <AllRouteConfig />
         </AuthContext.Provider>
       ) : (
-        <AuthContext.Provider
-        value={{ user, setUser, isLoading, setIsLoading }}
-      >
-        <AllRouteConfig />
-      </AuthContext.Provider>
+        <div>loading ....</div>
       )}
     </>
   );

@@ -39,7 +39,7 @@ const Activity: React.FC = () => {
             setSelectedActivity(null);
         }
     }}
-    tileClassName={({ date, view }) => {
+    tileClassName={({ date  }) => {
         const dateString = date.toISOString().split('T')[0];
         const events = data.filter(event => event.date.toISOString().split('T')[0] === dateString);
         return events.length > 0 ? 'activity-day' : null;

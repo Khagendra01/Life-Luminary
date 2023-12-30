@@ -1,6 +1,8 @@
 export interface PostInfo {
-    userId: string;
+    userId: string | undefined;
+    dateTime: string;
     content: string;
+    isNameHidden: boolean;
 }
 
 export interface UserReact {

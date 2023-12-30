@@ -12,26 +12,10 @@ import Activity from "../pages/Activity";
 import { AuthContext } from "../App";
 
 
-const UserRouteConfig: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/activity" element={<Activity />} />
-        <Route path="/bedtime" element={<BedTime />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-
 const AllRouteConfig: React.FC = () => {
   const { user } = useContext(AuthContext) || {};
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -49,4 +33,4 @@ const AllRouteConfig: React.FC = () => {
   );
 }
 
-export  { UserRouteConfig, AllRouteConfig };
+export  { AllRouteConfig };
