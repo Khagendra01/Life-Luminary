@@ -41,8 +41,11 @@ function App() {
           <RouteConfig />
         </AuthContext.Provider>
       ) : (
-        // Render a loading indicator or a login screen
-        <div>Loading...</div>
+        <AuthContext.Provider
+        value={{ user, setUser, isLoading, setIsLoading }}
+      >
+        <RouteConfig />
+      </AuthContext.Provider>
       )}
     </>
   );
