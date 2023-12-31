@@ -28,6 +28,15 @@ export interface FeedPosts {
 }
 
 export interface ReactResponse {
-    goodJob: number;
-    love: number;
+    goodJob: number | boolean | undefined ;
+    love: number | boolean | undefined;
+}
+
+export interface ReactionModel {
+    [key: string]: number | boolean | undefined;
+}
+
+export interface EachReact {
+    userId: string | undefined;
+    postId: string;
 }

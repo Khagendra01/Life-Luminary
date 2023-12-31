@@ -1,4 +1,4 @@
-import { FeedPosts, PostInfo, ReactResponse } from "../models/postModel";
+import { EachReact, FeedPosts, PostInfo, ReactResponse } from "../models/postModel";
 import instance from "./instance";
 
 function postIt(postInfo : PostInfo) {
@@ -29,7 +29,32 @@ async function getPost(): Promise<FeedPosts[] | null> {
 
 async function getReact( postId: string): Promise<ReactResponse | null> {
   try {
-    const response = await instance.get<ReactResponse>(`/api/Post/postReact/${postId}`);
+    const response = await instance.get<ReactResponse>('/api/Post/getReact', {
+      params: {
+        postId: postId,
+      },
+    });
+    
+    if (response) {
+      return response as unknown as ReactResponse;
+    } else {
+      console.error("Error fetching the data");
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function getEachReact( reactRequest: EachReact): Promise<ReactResponse | null> {
+  try {
+    const response = await instance.get<ReactResponse>('/api/Post/getEachReact', {
+      params: {
+        reactRequest: reactRequest,
+      },
+    });
+    
     if (response) {
       return response as unknown as ReactResponse;
     } else {
@@ -43,4 +68,4 @@ async function getReact( postId: string): Promise<ReactResponse | null> {
 }
 
 
-export { postIt, getPost, getReact };
+export { postIt, getPost, getReact, getEachReact };
