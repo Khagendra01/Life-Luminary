@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { getEachReact, getPost, getReact } from "../api/postFeed";
-import { EachReact, FeedPosts, ReactionModel } from "../models/postModel";
+import { getEachReact, getPost, getReact, postReact } from "../api/postFeed";
+import { EachReact, FeedPosts, ReactionModel, UserReact } from "../models/postModel";
 import { AuthContext } from "../App";
 
 const Feed: React.FC = () => {
@@ -33,9 +33,49 @@ const Feed: React.FC = () => {
     getAllPost();
   }, []);
 
-  const handleGoodJob = async () => {};
+  const handleGoodJob = async (postId: string) => {
 
-  const handleLove = async () => {};
+    if( isGoodJob[postId] !== undefined && isLove[postId] !== undefined){
+      const newReact: UserReact = {
+        userId: user?.id,
+        postId: postId,
+        isGoodJob: !isGoodJob[postId],
+        isLove: isGoodJob[postId],
+      }
+    
+    await postReact(newReact)
+    .then( () => {
+      getAllReact(postId)
+      getMyReact(postId)
+    })
+    .catch(() => {
+      console.log("try again");
+    });
+  }
+
+  };
+
+  const handleLove = async (postId: string) => {
+
+    if( isGoodJob[postId] !== undefined && isLove[postId] !== undefined){
+      const newReact: UserReact = {
+        userId: user?.id,
+        postId: postId,
+        isGoodJob: isGoodJob[postId],
+        isLove: !isLove[postId],
+      }
+    
+    await postReact(newReact)
+    .then( () => {
+      getAllReact(postId)
+      getMyReact(postId)
+    })
+    .catch(() => {
+      console.log("try again");
+    });
+  }
+
+  };
 
   const getAllReact = async (postId: string) => {
     await getReact(postId)
@@ -68,7 +108,6 @@ const Feed: React.FC = () => {
         ...prevState,
         [postId]: res?.goodJob,
       }));
-
       setIsLove((prevState) => ({
         ...prevState,
         [postId]: res?.love,
@@ -80,15 +119,12 @@ const Feed: React.FC = () => {
     
   }
 
-
   useEffect(() => {
     const fetchReactions = async () => {
       if (posts) {
-        await Promise.all(posts.map((post) => { 
-          
+        await Promise.all(posts.map((post) => {       
           getAllReact(post.id);
-          getMyReact(post.id);
-          
+          getMyReact(post.id);     
         }
           ));
       }
@@ -116,23 +152,23 @@ const Feed: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <button
-                        onClick={() => handleGoodJob()}
+                        onClick={() => handleGoodJob(post.id)}
                         disabled={false}
-                        className="px-2 py-1 bg-blue-500 text-white rounded mr-2"
+                        className={`px-2 py-1 ${isGoodJob[post.id] !== undefined && isGoodJob[post.id] ? 'bg-secondary' : 'bg-blue-500'} text-white rounded mr-2`}
                       >
                         Good Job
                       </button>
-                      <span className="mr-2">{goodJob[post.id]} {isGoodJob[post.id]}</span>
+                      <span className="mr-2">{goodJob[post.id]} </span>
                     </div>
                     <div>
                       <button
-                        onClick={() => handleLove()}
+                        onClick={() => handleLove(post.id)}
                         disabled={false}
-                        className="px-2 py-1 bg-red-500 text-white rounded mr-2"
+                        className={`px-2 py-1 ${isLove[post.id] !== undefined && isLove[post.id] ? 'bg-secondary' : 'bg-red-500'} text-white rounded mr-2`}
                       >
                         Love
                       </button>
-                      <span>{love[post.id]} {isLove[post.id]}</span>
+                      <span>{love[post.id]} </span>
                     </div>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ const Navbar = () => {
 
     const navigate = useNavigate();
 
-    const user = true
+    //const user = true
 
     return (
         <>

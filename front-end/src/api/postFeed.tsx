@@ -1,9 +1,20 @@
-import { EachReact, FeedPosts, PostInfo, ReactResponse } from "../models/postModel";
+import { EachReact, FeedPosts, PostInfo, ReactResponse, UserReact } from "../models/postModel";
 import instance from "./instance";
 
 function postIt(postInfo : PostInfo) {
     return instance
       .post("/api/Post/post", postInfo)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }
+
+  function postReact(reactInfo : UserReact) {
+    return instance
+      .post("/api/Post/react", reactInfo)
       .then((response) => {
         return response;
       })
@@ -69,4 +80,4 @@ async function getEachReact( reactRequest: EachReact): Promise<ReactResponse | n
 }
 
 
-export { postIt, getPost, getReact, getEachReact };
+export { postIt, postReact, getPost, getReact, getEachReact };

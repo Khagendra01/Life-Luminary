@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import MostRatedCard from "../components/MostRatedCard";
 import './styles/activity.css'
+import { FeedPosts } from '../models/postModel';
+import { getMyPost } from '../api/activity';
+import { AuthContext } from '../App';
 
-interface Event {
-  date: Date;
-  activity: string;
-}
 
 const Activity: React.FC = () => {
-    const data: Event[] = [
-       { date: new Date('2023-12-01'), activity: 'User logged in' },
-       { date: new Date('2023-12-15'), activity: 'User logged in' },
-       { date: new Date('2023-12-02'), activity: 'User logged in' },
+    
+    const { user } = useContext(AuthContext) || {};
 
-    ];
+    const getPost = async () => {
 
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+        await getMyPost( user?.id )
+          .then((res) => {
+            setData(res);
+          })
+          .catch(() => {
+            console.log("Error fetching Posts");
+          });
+      };
+
+      useEffect(() => {
+        getPost();
+      }, []);
+
+
+      const [data, setData] = useState<FeedPosts[] | null>([]);
+
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
 
     return (
@@ -30,10 +43,10 @@ const Activity: React.FC = () => {
     className="bg-gray-200 text-gray-700 rounded-lg p-8 m-4 shadow-lg border-2 border-gray-300 font-sans hover:shadow-xl transition-all duration-200"
     onClickDay={(value: Date) => {
         const dateString = value.toISOString().split('T')[0];
-        const event = data.find(event => event.date.toISOString().split('T')[0] === dateString);
+        const event = data?.find(event => event.dateTime.split('T')[0] === dateString);
         if (event) {
-            setSelectedDate(event.date);
-            setSelectedActivity(event.activity);
+            setSelectedDate(event.dateTime);
+            setSelectedActivity(event.content);
         } else {
             setSelectedDate(null);
             setSelectedActivity(null);
@@ -41,7 +54,7 @@ const Activity: React.FC = () => {
     }}
     tileClassName={({ date  }) => {
         const dateString = date.toISOString().split('T')[0];
-        const events = data.filter(event => event.date.toISOString().split('T')[0] === dateString);
+        const events = data?.filter(event => event.dateTime.split('T')[0] === dateString);
         return events.length > 0 ? 'activity-day' : null;
     }}
 />

@@ -4,6 +4,7 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { useState } from 'react';
+import bed from '../assets/bed.jpg';
 
 const BedTime = () => {
 
@@ -47,7 +48,7 @@ const BedTime = () => {
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4">
       <div className="md:flex">
         <div className="md:flex-shrink-0">
-          <img className="h-48 w-full object-cover md:w-48" src="/path-to-your-image.jpg" alt="Bedtime story" />
+        <img className="h-full md:h-48 w-full md:w-48 object-cover" src={bed} alt="Bedtime story" />
         </div>
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Bedtime Story</div>

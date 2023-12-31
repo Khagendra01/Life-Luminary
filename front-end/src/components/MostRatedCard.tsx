@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface MostRatedCardProps {
-  date: Date;
+  date: string;
   activity: string;
 }
 
