@@ -51,7 +51,8 @@ async function getEachReact( reactRequest: EachReact): Promise<ReactResponse | n
   try {
     const response = await instance.get<ReactResponse>('/api/Post/getEachReact', {
       params: {
-        reactRequest: reactRequest,
+        userId: reactRequest.userId,
+        postId: reactRequest.postId
       },
     });
     

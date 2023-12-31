@@ -1,15 +1,32 @@
 import { useState } from 'react';
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { ContactInfo } from '../models/contactModel';
+import { contactUs } from '../api/contactUs';
 
 const ContactUs = () => {
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
+    const initInfo: ContactInfo = { firstName: "", lastName:"", email:"", message:"" };
+
+    const [contactInfo, setContactInfo] = useState<ContactInfo>( initInfo );
+
+    const handleloginInfoChange = (name: keyof ContactInfo, value: string) => {
+        setContactInfo({ ...contactInfo, [name]: value });
+    }
+
+    const handleSubmit = async() => {
         setLoading(true);
-        // Handle form submission here
-        // After form submission is done
+        console.log(contactInfo)
+        await contactUs(contactInfo)
+        .then(() => {
+            alert("Contact Us report Posted")
+            setContactInfo(initInfo)
+        })
+        .catch((error) => {
+            alert(`Sorry ${error.message}`);
+          });
+
         setLoading(false);
     }
 
@@ -19,15 +36,15 @@ const ContactUs = () => {
             <div className="flex flex-col items-center py-2">
                 <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3">
                     <h2 className="text-2xl font-bold mb-5 text-gray-900">Contact Us</h2>
-                    <form className="space-y-5" onSubmit={handleSubmit}>
-                        <input className="w-full p-2 border border-gray-300 rounded-lg" type="text" placeholder="First Name" required />
-                        <input className="w-full p-2 border border-gray-300 rounded-lg" type="text" placeholder="Last Name" required />
-                        <input className="w-full p-2 border border-gray-300 rounded-lg" type="email" placeholder="Email" required />
-                        <textarea className="w-full p-2 border border-gray-300 rounded-lg" placeholder="Message" required></textarea>
-                        <button className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm" type="submit" disabled={loading}>
+                    <div className="space-y-5" onSubmit={handleSubmit}>
+                        <input className="w-full p-2 border border-gray-300 rounded-lg" type="text" id ="firstName" name ="firstName" placeholder="First Name" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)}/>
+                        <input className="w-full p-2 border border-gray-300 rounded-lg" type="text" id ="lastName" name ="lastName" placeholder="Last Name" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)} />
+                        <input className="w-full p-2 border border-gray-300 rounded-lg" type="email" id ="email" name="email" placeholder="Email" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)} />
+                        <textarea className="w-full p-2 border border-gray-300 rounded-lg" id="message" name="message" placeholder="Message" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)}></textarea>
+                        <button onClick={handleSubmit} className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm" type="submit" disabled={loading}>
                             {loading ? 'Loading...' : 'Submit'}
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
 

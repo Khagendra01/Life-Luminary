@@ -41,7 +41,7 @@ function App() {
           <AllRouteConfig />
         </AuthContext.Provider>
       ) : (
-        <div>loading ....</div>
+       <div>Loading...</div>
       )}
     </>
   );

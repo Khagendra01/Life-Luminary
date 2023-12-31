@@ -61,6 +61,7 @@ const Feed: React.FC = () => {
       userId: user?.id,
       postId: postId
     }
+
     await getEachReact(thisReq)
     .then((res) => {
       setIsGoodJob((prevState) => ({
@@ -85,8 +86,8 @@ const Feed: React.FC = () => {
       if (posts) {
         await Promise.all(posts.map((post) => { 
           
-          getAllReact(post.id)
-          getMyReact(post.id)
+          getAllReact(post.id);
+          getMyReact(post.id);
           
         }
           ));
