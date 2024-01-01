@@ -52,11 +52,12 @@ const Activity: React.FC = () => {
             setSelectedActivity(null);
         }
     }}
-    tileClassName={({ date  }) => {
+    tileClassName={({ date }) => {
         const dateString = date.toISOString().split('T')[0];
-        const events = data?.filter(event => event.dateTime.split('T')[0] === dateString);
+        const events = data?.filter(event => event.dateTime.split('T')[0] === dateString) || [];
         return events.length > 0 ? 'activity-day' : null;
     }}
+    
 />
             </div>
             {selectedDate && selectedActivity && (
