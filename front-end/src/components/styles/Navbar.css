@@ -1,0 +1,10 @@
+.gradient-button {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all 2s ease;
+}
+
+.gradient-button:hover {
+    background-position: left bottom;
+}

@@ -1,9 +1,22 @@
 
-import { navItems } from "./Navbar";
-
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const Footer = () => {
+
+     //const { user } = useContext(AuthContext) || {};
+    const user = true;
+
+    const navItems = user ? [
+        { link: "Feed", path: "Feed" },
+        { link: "Bed Time", path: "bedtime" },
+        { link: "Activity", path: "activity" },
+        { link: "About", path: "about" },
+        { link: "Contact-Us", path: "contact" },
+    ] : [
+        { link: "Feed", path: "Feed" },
+        { link: "About", path: "about" },
+        { link: "Contact-Us", path: "contact" },
+    ];
 
     return (
         <footer className="bg-gray-800 text-white py-10 mt-10">
