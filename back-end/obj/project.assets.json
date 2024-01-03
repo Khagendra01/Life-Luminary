@@ -31,10 +31,10 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
-      "Azure.AI.OpenAI/1.0.0-beta.12": {
+      "Azure.AI.OpenAI/1.0.0-beta.8": {
         "type": "package",
         "dependencies": {
-          "Azure.Core": "1.36.0",
+          "Azure.Core": "1.35.0",
           "System.Text.Json": "4.7.2"
         },
         "compile": {
@@ -48,7 +48,7 @@
           }
         }
       },
-      "Azure.Core/1.36.0": {
+      "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
@@ -1156,32 +1156,32 @@
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
-    "Azure.AI.OpenAI/1.0.0-beta.12": {
-      "sha512": "0ol0OMj9UnwyJ5d45nq3CH2moND2qvK4BRFE4PW+krsLySR4RS7wOuGlThgqRdl3bwYs8TJwTaUDE3X9jmrt+A==",
+    "Azure.AI.OpenAI/1.0.0-beta.8": {
+      "sha512": "xu0QIsD8YJakKsVM2odGBToXwwwI3XzjP8dggD40CQZ4ytKMFAFyboVmtRs0zPFJgGNISMdQIqn2Cg21pYSQ2A==",
       "type": "package",
-      "path": "azure.ai.openai/1.0.0-beta.12",
+      "path": "azure.ai.openai/1.0.0-beta.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.ai.openai.1.0.0-beta.12.nupkg.sha512",
+        "azure.ai.openai.1.0.0-beta.8.nupkg.sha512",
         "azure.ai.openai.nuspec",
         "azureicon.png",
         "lib/netstandard2.0/Azure.AI.OpenAI.dll",
         "lib/netstandard2.0/Azure.AI.OpenAI.xml"
       ]
     },
-    "Azure.Core/1.36.0": {
-      "sha512": "vwqFZdHS4dzPlI7FFRkPx9ctA+aGGeRev3gnzG8lntWvKMmBhAmulABi1O9CEvS3/jzYt7yA+0pqVdxkpAd7dQ==",
+    "Azure.Core/1.35.0": {
+      "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
-      "path": "azure.core/1.36.0",
+      "path": "azure.core/1.35.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.core.1.36.0.nupkg.sha512",
+        "azure.core.1.35.0.nupkg.sha512",
         "azure.core.nuspec",
         "azureicon.png",
         "lib/net461/Azure.Core.dll",
@@ -3081,7 +3081,7 @@
     "net6.0": [
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
-      "Azure.AI.OpenAI >= 1.0.0-beta.12",
+      "Azure.AI.OpenAI >= 1.0.0-beta.8",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.24",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.24",
       "Microsoft.EntityFrameworkCore >= 6.0.24",
@@ -3142,7 +3142,7 @@
           },
           "Azure.AI.OpenAI": {
             "target": "Package",
-            "version": "[1.0.0-beta.12, )"
+            "version": "[1.0.0-beta.8, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

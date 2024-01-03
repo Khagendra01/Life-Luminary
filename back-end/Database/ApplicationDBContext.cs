@@ -15,6 +15,7 @@ namespace back_end.Database
 
         public DbSet<Post> Post { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
+        public DbSet<UserReact> UserReact { get; set; }
         public DbSet<Story> Stories { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {

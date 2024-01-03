@@ -21,6 +21,7 @@ namespace back_end.Classes
     public class PostRequest
     {
         public string UserID { get; set; }
+        public string DateTime { get; set; }
         public string Content { get; set; }
         public bool IsNameHidden { get; set; }
 
@@ -30,11 +31,29 @@ namespace back_end.Classes
     {
         public string UserID { get; set; }
         public string PostID { get; set; }
-        public bool IsNameHidden { get; set; }
 
         public bool isGoodJob { get; set; }
         public bool isLove { get; set; }
 
 
+    }
+
+    public class ReactResponse
+    {
+        public int GoodJob { get; set; }
+        public int Love { get; set; }
+
+    }
+
+    public class EachReact
+    {
+        public string UserId { get; set; }
+        public string PostId { get; set; }
+    }
+
+    public class EachReactResponse
+    {
+        public bool GoodJob { get; set; }
+        public bool Love { get; set; }
     }
 }

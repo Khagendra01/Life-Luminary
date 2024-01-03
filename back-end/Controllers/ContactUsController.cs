@@ -18,12 +18,13 @@ namespace back_end.Controllers
             this._mapper = mapper;
         }
 
-        [HttpPost()]
-        public async Task<Response<bool>> AddContactUs(ContactUs newRequest)
+        [HttpPost("post")]
+        public async Task<Response<bool>> AddContactUs(ContactUsReq newRequest)
         {
             try
             {
-                _dbContext.Add(newRequest);
+                ContactUs thisRequest = _mapper.Map<ContactUs>(newRequest);
+                _dbContext.Add(thisRequest);
                 await _dbContext.SaveChangesAsync();
                 return new Response<bool>("Contact Support successfully added", true, true);
             }

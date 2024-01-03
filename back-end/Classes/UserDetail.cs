@@ -1,4 +1,6 @@
-﻿namespace back_end.Classes 
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace back_end.Classes 
 {
     public class UserDetail
     {
@@ -21,9 +23,15 @@
 
     }
 
+    public class UserProfileView
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
     public class UserReact
     {
-        public string ID { get; set; }
+        public string Id { get; set; }
         public string UserId { get; set; }
         public string PostId { get; set; }
         public bool isGoodJob { get; set; }
@@ -31,7 +39,7 @@
 
         public UserReact()
         {
-            this.ID = Guid.NewGuid().ToString();
+            this.Id = Guid.NewGuid().ToString();
             this.isGoodJob = false;
             this.isLove = false;
         }

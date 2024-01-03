@@ -13,6 +13,10 @@ namespace ProfessorAIAPI
             CreateMap<RegisterInfo, User>();
             CreateMap<PostRequest, Post>();
             CreateMap<PostReact, UserReact>();
+            CreateMap<ContactUsReq, ContactUs>();
+            CreateMap<User, UserProfileView>();
+            CreateMap<Message, ChatMessage>()
+               .ForMember(dest => dest.Role, src => src.MapFrom(src => new ChatRole(src.Role)));
         }
     }
 }
