@@ -40,3 +40,8 @@ export interface EachReact {
     userId: string | undefined;
     postId: string;
 }
+
+export interface StoryRes {
+    title: string;
+    content: string;
+}
