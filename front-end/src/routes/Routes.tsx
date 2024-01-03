@@ -10,6 +10,7 @@ import Register from "../components/Register";
 import Login from "../components/Login";
 import Activity from "../pages/Activity";
 import { AuthContext } from "../App";
+import Profile from "../pages/profile";
 
 
 const AllRouteConfig: React.FC = () => {
@@ -29,6 +30,7 @@ const AllRouteConfig: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/activity" element={<Activity />} />
         <Route path="/bedtime" element={<BedTime />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
@@ -43,6 +45,7 @@ const AllRouteConfig: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/activity" element={<Login />} />
         <Route path="/bedtime" element={<Login />} />
+        <Route path="/profile" element={<Profile />} /> 
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>

@@ -1,10 +1,12 @@
 
 import '@fortawesome/fontawesome-free/css/all.css';
+import { useContext } from 'react';
+import { AuthContext } from '../App';
 
 const Footer = () => {
 
-     //const { user } = useContext(AuthContext) || {};
-    const user = true;
+     const { user } = useContext(AuthContext) || {};
+   // const user = true;
 
     const navItems = user ? [
         { link: "Feed", path: "Feed" },

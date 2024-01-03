@@ -2,13 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import { LoginInfo } from '../models/authModel';
 import Footer from './Footer';
 import Navbar from './Navbar';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { login } from '../api/authApi';
+import { AuthContext } from '../App';
 
 const Login = () => {
 
     const [loginInfo, setloginInfo] = useState<LoginInfo>({ userName: "", password: ""});
     //const [errorMessage, setErrorMessage] = useState("");
+
+    const { setUser } = useContext(AuthContext) || {};
 
     const navigate = useNavigate();
 
@@ -22,7 +25,8 @@ const Login = () => {
             const token = res?.accessToken;
             if (token !== undefined) {
                 localStorage.setItem("accessToken", token);
-                navigate("/bedTime"); 
+                setUser(res)
+                navigate("/"); 
               }
         } catch (error) {
             // Handle the error

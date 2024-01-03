@@ -11,11 +11,11 @@ import { AuthContext } from '../App';
 
 const Navbar = () => {
 
-    //const { user } = useContext(AuthContext) || {};
+    const { user, setUser } = useContext(AuthContext) || {};
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
-    const user = true;
+    //const user = false;
 
     const navItems = user ? [
         { link: "Feed", path: "Feed" },
@@ -35,11 +35,16 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen);
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setUser(null)
+    }
+
     const navigate = useNavigate();
 
     return (
         <>
-            <nav className='bg-gradient-to-r from-primary to-secondary text-white py-4 px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-64 fixed top-0 right-0 left-0'>
+            <nav className='bg-gradient-to-r from-primary to-secondary text-white py-4 px-0 md:px-8 lg:px-16 xl:px-24 2xl:px-64 fixed top-0 right-0 left-0'>
                 <div className='flex justify-between items-center'>
                     {/* mobile menu */}
                     <div className='flex px-4 justify-between'>
@@ -86,7 +91,7 @@ const Navbar = () => {
                                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                         <button onClick={() => navigate('/profile')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Profile</button>
                                         <button onClick={() => navigate('/settings')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Settings</button>
-                                        <button onClick={() => { }} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Logout</button>
+                                        <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Logout</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +116,7 @@ const Navbar = () => {
 
 
                     {/* mobile menu */}
-                    <div className='md:hidden flex items-center justify-end'>
+                    <div className='md:hidden mr-5 flex items-center justify-end'>
                         {user ? (
                             <div className="relative inline-block text-left" onClick={() => setDropdownVisible(!dropdownVisible)}>
                                 <div>
