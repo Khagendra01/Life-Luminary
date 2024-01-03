@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getEachReact, getPost, getReact, postReact } from "../api/postFeed";
-import { EachReact, FeedPosts, ReactionModel, UserReact } from "../models/postModel";
+import { EachReact, FeedPosts, ReactionModel, UserReact, ReactionModelPost } from "../models/postModel";
 import { AuthContext } from "../App";
+import { getAllUser } from "../api/activity";
 
 const Feed: React.FC = () => {
 
@@ -16,6 +17,8 @@ const Feed: React.FC = () => {
 
   const [isGoodJob, setIsGoodJob] = useState<ReactionModel>({});
   const [isLove, setIsLove] = useState<ReactionModel>({});
+
+  const [postUser, setPostUser] = useState<ReactionModelPost>({});
 
   const [postLoading, setPostLoading] = useState(true);
 
@@ -119,11 +122,27 @@ const Feed: React.FC = () => {
     
   }
 
+  const getUsers = async(postId: string, userId: string) => {
+    await getAllUser(userId)
+    .then((res) => {
+
+      setPostUser((prevState) => ({
+        ...prevState,
+        [postId]: res,
+      }));
+    })
+    .catch(() => {
+      console.log("Error fetching users profile");
+    });
+  }
+
   useEffect(() => {
     const fetchReactions = async () => {
       if (posts) {
+        console.log(posts)
         await Promise.all(posts.map((post) => {       
           getAllReact(post.id);
+          getUsers(post.id, post.userID)
           getMyReact(post.id);     
         }
           ));
@@ -147,7 +166,7 @@ const Feed: React.FC = () => {
                   key={post.id}
                   className="border rounded shadow p-4 space-y-2"
                 >
-                  <h3 className="text-xl font-bold">{post.userId}</h3>
+                  <h3 className="text-xl font-bold">{postUser[post.id]?.firstName}{postUser[post.id]?.lastName}</h3>
                   <p className="text-base">{post.content}</p>
                   <div className="flex items-center justify-between">
                     <div>

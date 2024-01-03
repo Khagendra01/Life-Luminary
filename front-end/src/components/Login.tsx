@@ -22,11 +22,12 @@ const Login = () => {
             const token = res?.accessToken;
             if (token !== undefined) {
                 localStorage.setItem("accessToken", token);
+                navigate("/bedTime"); 
               }
-            navigate("/profile"); // Navigate to the '/profile' route
         } catch (error) {
             // Handle the error
             console.error(error);
+            setloginInfo({ userName: "", password: ""})
         } finally {
             // Perform any cleanup or additional actions
             // setLoading(false); // Stop loading

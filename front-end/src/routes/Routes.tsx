@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import { useContext } from "react";
 
 import About from "../pages/About";
@@ -13,10 +13,12 @@ import { AuthContext } from "../App";
 
 
 const AllRouteConfig: React.FC = () => {
-  const { user } = useContext(AuthContext) || {};
+  const { user, isLoading } = useContext(AuthContext) || {};
 
 
   return (
+    <>
+    {!isLoading && user ? (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,11 +27,27 @@ const AllRouteConfig: React.FC = () => {
         <Route path="/feed" element={<Feed />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/activity" element={user ? <Activity /> : <Navigate to="/login" />} />
-        <Route path="/bedtime" element={user ? <BedTime /> : <Navigate to="/login" />} />
+        <Route path="/activity" element={<Activity />} />
+        <Route path="/bedtime" element={<BedTime />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
+    ) : 
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/activity" element={<Login />} />
+        <Route path="/bedtime" element={<Login />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes>
+    </BrowserRouter>
+    }
+    </>
   );
 }
 

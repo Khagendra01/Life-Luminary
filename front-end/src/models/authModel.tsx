@@ -27,3 +27,8 @@ export interface AuthContextType {
     isLoading: boolean;
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface UserProfileView {
+    firstName: string;
+    lastName: string;
+}

@@ -38,7 +38,7 @@ const Activity: React.FC = () => {
     return (
         <>
             <Navbar />
-            <div className="flex justify-center">
+            <div className="flex justify-centers">
             <Calendar 
     className="bg-gray-200 text-gray-700 rounded-lg p-8 m-4 shadow-lg border-2 border-gray-300 font-sans hover:shadow-xl transition-all duration-200"
     onClickDay={(value: Date) => {

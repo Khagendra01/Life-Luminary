@@ -1,7 +1,9 @@
+import { UserProfileView } from "./authModel";
+
 export interface PostInfo {
     userId: string | undefined;
     dateTime: string;
-    content: string;
+    content: string | undefined;
     isNameHidden: boolean;
 }
 
@@ -14,7 +16,7 @@ export interface UserReact {
 
 export interface FeedPosts {
     id: string;
-    userId: string;
+    userID: string;
     content: string;
     dateTime: string;
     isNameHidden: boolean;
@@ -28,6 +30,10 @@ export interface ReactResponse {
 
 export interface ReactionModel {
     [key: string]: number | boolean | undefined;
+}
+
+export interface ReactionModelPost {
+    [key: string]: UserProfileView | null;
 }
 
 export interface EachReact {

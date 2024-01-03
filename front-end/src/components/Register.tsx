@@ -29,6 +29,7 @@ const Register = () => {
                 navigate("/login", {state: "Thank you for signing up. Please sign in"})
             })
             .catch((error) => {
+              setRegisterInfo({ firstName: "", lastName: "", userName: "", email: "", password: "", confirmPassword: "" })
               alert(`Sorry ${error.message}`);
             });
 
