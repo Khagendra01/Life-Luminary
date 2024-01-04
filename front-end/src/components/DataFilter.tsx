@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FeedPosts } from "../models/postModel";
+
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 import "./styles/datafilter.css"
 
@@ -33,6 +36,13 @@ const DataFilter: React.FC<DataProps> = ({ data }) => {
   const [filteredData, setFilteredData] = useState<DataItem[]>(data);
   const [selectedMonth, setSelectedMonth] = useState<string>("All");
   const [selectedYear, setSelectedYear] = useState<string>("All");
+  const tableRef = useRef(null);
+
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    autoTable(doc, { html: tableRef.current ?? "" });
+    doc.save("filteredData.pdf");
+  };
 
   const filterByMonth = (month: string) => {
     setSelectedMonth(month);
@@ -100,6 +110,12 @@ const DataFilter: React.FC<DataProps> = ({ data }) => {
               <option key={index}>{year}</option>
             ))}
           </select>
+          <button
+          onClick={downloadPDF}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+        >
+          Download as PDF
+        </button>
         </div>
 
         <button
