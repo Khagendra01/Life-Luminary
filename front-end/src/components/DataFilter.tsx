@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FeedPosts } from "../models/postModel";
 
+import "./styles/datafilter.css"
+
 interface DataProps {
   data: FeedPosts[] | null;
 }
@@ -108,17 +110,22 @@ const DataFilter: React.FC<DataProps> = ({ data }) => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <table className="excel-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+      <tbody>
         {filteredData.map((item, index) => (
-          <div
-            key={index}
-            className="border p-4 hover:border-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-          >
-            <p className="font-bold">{item.dateTime}</p>
-            <p>{item.content}</p>
-          </div>
+          <tr key={index} className="excel-row">
+            <td>{item.dateTime}</td>
+            <td>{item.content}</td>
+          </tr>
         ))}
-      </div>
+      </tbody>
+    </table>
     </div>
   );
 };

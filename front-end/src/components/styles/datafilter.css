@@ -1,0 +1,24 @@
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .excel-row {
+    border: 1px solid #ccc;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  
+  .excel-row:hover {
+    border-color: #3498db;
+  }
+  
+  th, td {
+    padding: 16px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
