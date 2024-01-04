@@ -62,30 +62,31 @@ const DataFilter: React.FC<DataProps> = ({ data }) => {
   };
 
   return (
-    <div>
-      <select
-        className="form-select block w-full mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      >
-        <option value="all">All</option>
-        <option value="week">This Week</option>
-        <option value="month">This Month</option>
-        <option value="year">This Year</option>
-      </select>
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <select
+      className="form-select block w-full mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+      value={filter}
+      onChange={(e) => setFilter(e.target.value)}
+    >
+      <option value="all">All</option>
+      <option value="week">This Week</option>
+      <option value="month">This Month</option>
+      <option value="year">This Year</option>
+    </select>
+    <div className="grid grid-cols-2 divide-x divide-gray-200">
       {filterData().map((item, index) => (
         <div
           key={index}
-          className="p-4 mb-2 bg-blue-100 text-blue-700 rounded-md"
+          className={`p-4 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
         >
-          <p className="hover:text-blue-500">
+          <p className="text-gray-600">
             {format(new Date(item.dateTime), "yyyy-MM-dd")}
           </p>
-
-          <p>{item.content}</p>
+          <p className="text-gray-900">{item.content}</p>
         </div>
       ))}
     </div>
+  </div>
   );
 };
 
