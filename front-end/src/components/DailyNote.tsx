@@ -83,7 +83,7 @@ const DailyNote = () => {
           <h1 className="text-3xl font-semibold text-black">{day}</h1>
         </div>
         <textarea
-          value={content}
+          value={ user ? content : ""}
           onChange={(e) => setContent(e.target.value)}
           className="w-full h-full bg-gray-200 rounded-md px-4 py-2 mb-4"
           placeholder="Share your amazing story of the day..."
@@ -97,7 +97,7 @@ const DailyNote = () => {
           <option value="true">Public</option>
           <option value="false">Anonymous</option>
         </select>
-        <p className="text-red-500">{errorMessage}</p>
+        <p className="text-red-500">{ user && errorMessage}</p>
         <div className="flex justify-center items-center space-x-4">
           <button
             onClick={handleSubmit}
