@@ -3,3 +3,7 @@
     font-display: bold;
     font-weight: bold;
 }
+
+.empty-day {
+    color: red !important;
+}

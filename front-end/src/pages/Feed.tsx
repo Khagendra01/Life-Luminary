@@ -42,8 +42,7 @@ const Feed: React.FC = () => {
       const newReact: UserReact = {
         userId: user?.id,
         postId: postId,
-        isGoodJob: !isGoodJob[postId],
-        isLove: isGoodJob[postId],
+        change: "goodJob",
       }
     
     await postReact(newReact)
@@ -64,8 +63,7 @@ const Feed: React.FC = () => {
       const newReact: UserReact = {
         userId: user?.id,
         postId: postId,
-        isGoodJob: isGoodJob[postId],
-        isLove: !isLove[postId],
+        change: "love",
       }
     
     await postReact(newReact)

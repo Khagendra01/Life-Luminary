@@ -10,8 +10,7 @@ export interface PostInfo {
 export interface UserReact {
     userId: string | undefined;
     postId: string;
-    isGoodJob: number | boolean | undefined;
-    isLove: number | boolean | undefined;   
+    change: string;  
 }
 
 export interface FeedPosts {

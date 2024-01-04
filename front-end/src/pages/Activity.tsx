@@ -8,6 +8,7 @@ import "./styles/activity.css";
 import { FeedPosts } from "../models/postModel";
 import { getMyPost } from "../api/activity";
 import { AuthContext } from "../App";
+import DataFilter from "../components/DataFilter";
 
 const Activity: React.FC = () => {
   const { user } = useContext(AuthContext) || {};
@@ -34,7 +35,7 @@ const Activity: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-centers">
+      <div className="flex justify-center">
         <Calendar
           className="bg-gray-200 text-gray-700 rounded-lg p-8 m-4 shadow-lg border-2 border-gray-300 font-sans hover:shadow-xl transition-all duration-200"
           onClickDay={(value: Date) => {
@@ -56,13 +57,17 @@ const Activity: React.FC = () => {
               data?.filter(
                 (event) => event.dateTime.split("T")[0] === dateString
               ) || [];
-            return events.length > 0 ? "activity-day" : null;
+            return events.length > 0 ? "activity-day" : "empty-day";
           }}
         />
       </div>
       {selectedDate && selectedActivity && (
         <MostRatedCard date={selectedDate} activity={selectedActivity} />
       )}
+
+      <DataFilter data={data} />
+
+
 
       <Footer />
     </>
