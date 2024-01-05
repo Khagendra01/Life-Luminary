@@ -40,8 +40,6 @@ namespace back_end.Classes
         public UserReact()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.isGoodJob = false;
-            this.isLove = false;
         }
 
     }

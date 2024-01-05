@@ -9,6 +9,8 @@ using back_end.Classes;
 using back_end.Database;
 using System;
 using System.Text;
+using back_end.Models;
+using back_end.Services;
 
 namespace ProfessorAIAPI
 {
@@ -33,6 +35,8 @@ namespace ProfessorAIAPI
                 .AddDefaultTokenProviders();
             services.AddControllers();
 
+            services.Configure<IdentityOptions>(options => options.SignIn.RequireConfirmedEmail = true);
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -51,6 +55,13 @@ namespace ProfessorAIAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:secret"]))
                 };
             });
+
+            //email configs
+
+            var emailConfig = Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailService, EmailService>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAny",

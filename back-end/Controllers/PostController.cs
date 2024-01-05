@@ -54,20 +54,24 @@ namespace back_end.Controllers
         }
 
         [HttpPost("react")]
-        public async Task<Response<bool>> AddReact(UserReact postReact)
+        public async Task<Response<bool>> AddReact(PostReact postReact)
         {
             try
             {
                 // Check if a record with the given UserId and PostId already exists
                 UserReact existingPost = _dbContext.UserReact
-                    .SingleOrDefault(p => p.UserId == postReact.UserId && p.PostId == postReact.PostId);
+                    .SingleOrDefault(p => p.UserId == postReact.UserID && p.PostId == postReact.PostID);
 
                 if (existingPost != null)
                 {
-                    // If the record exists, update the values
-                    existingPost.isGoodJob = postReact.isGoodJob;
-                    existingPost.isLove = postReact.isLove;
-
+                    if (postReact.Change == "goodJob")
+                    {
+                        existingPost.isGoodJob = !existingPost.isGoodJob;
+                    }
+                    else
+                    {
+                        existingPost.isLove = !existingPost.isLove;
+                    }                
                     _dbContext.Update(existingPost);
                 }
                 else

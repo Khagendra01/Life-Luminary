@@ -32,8 +32,7 @@ namespace back_end.Classes
         public string UserID { get; set; }
         public string PostID { get; set; }
 
-        public bool isGoodJob { get; set; }
-        public bool isLove { get; set; }
+        public string Change { get; set; }
 
 
     }
