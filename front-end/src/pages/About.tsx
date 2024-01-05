@@ -1,4 +1,7 @@
 import logo from '../assets/logo.png';
+import history from '../img/history.jpg'
+import mission from '../img/mission.jpg'
+import vision from '../img/vision.jpg'
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
@@ -25,18 +28,21 @@ const About = () => {
 
             {/* History Section */}
             <div className='mt-20 bg-gray-800 text-white py-12 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64'>
+            <img src={history} alt="Logo" className='m-4 w-32 h-32 md:w-48 md:h-48' />
                 <h2 className='m-4 text-3xl font-semibold'>Our History</h2>
                 <p className='m-4 text-lg'>Life Luminary was born out of a simple belief: the everyday moments and small acts of kindness in our lives often carry the most significance. We recognized that people wanted to capture these moments and reflect on them, not just document routines. We saw an opportunity to create a tool that not only helps individuals acknowledge these moments but also promotes a ripple of positivity. By facilitating reflection and growth, we've empowered our users to analyze their activities, identify areas for improvement, and share their journeys with others.</p>
             </div>
 
             {/* Mission Section */}
             <div className='mt-5 bg-gray-700 text-white py-12 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64'>
+            <img src={mission} alt="Logo" className='m-4 w-32 h-32 md:w-48 md:h-48' />
                 <h2 className='m-4 text-3xl font-semibold'>Our Mission</h2>
                 <p className='m-4 text-lg'>Our mission at Life Luminary is to inspire positivity, one day at a time. We believe in the power of small actions to make the world a better place. We aim to help our users recognize and appreciate the little victories, acts of kindness, and unexpected joys in their lives. We are committed to supporting conscious living and active kindness, encouraging everyone to make a difference, one entry each day. We also strive to be more than just a daily journal by providing a tool for reflection, growth, and sharing.</p>
             </div>
 
             {/* Vision Section */}
             <div className='mt-5 bg-gray-600 text-white py-12 px-12 md:px-24 lg:px-32 xl:px-48 2xl:px-64'>
+            <img src={vision} alt="Logo" className='m-4 w-32 h-32 md:w-48 md:h-48' />
                 <h2 className='m-4 text-3xl font-semibold'>Our Vision</h2>
                 <p className='m-4 text-lg'>Our vision for Life Luminary is to be more than just an app - we aspire to be a movement, a commitment to conscious living, and active kindness. We envision a world where every individual appreciates the value of their daily actions and experiences, recognizing their potential to inspire positivity and make the world a better place. We aim to facilitate this belief through our platform, encouraging our users to share their journeys and inspiring others to join in the movement of making a difference.</p>
             </div>

@@ -105,10 +105,10 @@ const Carousel = ({ images }: { images: string[] }) => {
                 <p className="text-gray-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">{carouselInsider.content}</p>
             </div>
             <div className="mt-4">
-                <button onClick={() => navigate(carouselInsider.buttonFRef)} className="bg-gradient-to-r from-purple-500 to-blue-700 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                <button onClick={() => navigate(carouselInsider.buttonFRef)} className="bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                     {carouselInsider.buttonF}
                 </button>
-                <button onClick={() => navigate(carouselInsider.buttonSRef)}  className="bg-gradient-to-r from-blue-700 to-purple-500 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                <button onClick={() => navigate(carouselInsider.buttonSRef)}  className="bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                 {carouselInsider.buttonS}
                 </button>
             </div>
