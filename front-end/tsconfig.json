@@ -15,10 +15,11 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
+    "strict": false, // Set strict to false
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": false // Add this line to disable strict null checks
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

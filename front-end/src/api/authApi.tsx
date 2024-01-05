@@ -23,8 +23,7 @@ async function login(loginInfo: LoginInfo): Promise<LogInResponse | null> {
       return null;
     }
   } catch (error) {
-    console.error(error);
-    return null;
+    throw new Error(error);
   }
 }
 

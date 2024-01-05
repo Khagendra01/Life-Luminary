@@ -7,11 +7,11 @@ import Carousel from '../components/Carousel';
 import piktar1 from '../img/piktar1.png';
 import piktar2 from '../img/piktar2.png';
 import piktar3 from '../img/piktar3.png';
-import piktar4 from '../img/piktar4.png';
+
 
 const Home = () => {
     // Create an array of the images
-    const images = [piktar1, piktar2, piktar3, piktar4];
+    const images = [piktar1, piktar2, piktar3];
 
     return (
         <>

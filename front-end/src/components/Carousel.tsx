@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./styles/carousel.css";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,44 @@ const Carousel = ({ images }: { images: string[] }) => {
     const navigate = useNavigate();
     // Create a state to keep track of the current image
     const [currentImage, setCurrentImage] = useState(0);
+
+    const [carouselInsider, setInsider] = useState({ title: "", content:"", buttonF:"", buttonFRef:"", buttonS:"", buttonSRef:""});
+
+    useEffect(() => {
+        switch (currentImage) {
+          case 0:
+            setInsider({
+              title: "One entry each day",
+              content: "changes you and people around you!",
+              buttonF: "Learn More",
+              buttonFRef: "/about",
+              buttonS: "Sign Up",
+              buttonSRef: "/register"
+            });
+            break;
+          case 1:
+            setInsider({
+              title: "Check the feed",
+              content: "Read other people's amazing day",
+              buttonF: "Feed",
+              buttonFRef: "/feed",
+              buttonS: "Activity",
+              buttonSRef: "/activity"
+            });
+            break;
+          case 2:
+            setInsider({
+              title: "Get story for your bed time",
+              content: "AI generated story according to your daily entry",
+              buttonF: "Story",
+              buttonFRef: "/bedTime",
+              buttonS: "About-Us",
+              buttonSRef: "/about"
+            });
+            break;
+        }
+      }, [currentImage]);
+
 
     // Create a function to handle the next image
     const nextImage = () => {
@@ -40,7 +78,7 @@ const Carousel = ({ images }: { images: string[] }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         <div className="col-span-1">
-            <img className="w-full h-auto transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" src={images[currentImage]} alt="carousel" />
+            <img className="w-full h-auto transition duration-500 ease-in-out transform" src={images[currentImage]} alt="carousel" />
         </div>
         <div className="col-span-1 flex flex-col items-center justify-center">
             <div className="flex flex-row items-center justify-center">
@@ -63,15 +101,15 @@ const Carousel = ({ images }: { images: string[] }) => {
                 </button>
             </div>
             <div className="mt-4 text-center">
-                <h2 className="text-2xl font-bold transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">One entry each day</h2>
-                <p className="text-gray-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">changes you and people around you!</p>
+                <h2 className="text-2xl font-bold transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">{carouselInsider.title}</h2>
+                <p className="text-gray-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">{carouselInsider.content}</p>
             </div>
             <div className="mt-4">
-                <button onClick={() => navigate('/about')} className="bg-gradient-to-r from-purple-500 to-blue-700 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
-                    Learn More
+                <button onClick={() => navigate(carouselInsider.buttonFRef)} className="bg-gradient-to-r from-purple-500 to-blue-700 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                    {carouselInsider.buttonF}
                 </button>
-                <button onClick={() => navigate('/register')}  className="bg-gradient-to-r from-blue-700 to-purple-500 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
-                    Sign Up
+                <button onClick={() => navigate(carouselInsider.buttonSRef)}  className="bg-gradient-to-r from-blue-700 to-purple-500 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                {carouselInsider.buttonS}
                 </button>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { register } from "../api/authApi.js";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,59 @@ const Register = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [fieldErrors, setFieldErrors] = useState<RegisterInfo>({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const emailValidator = (email: string) => {
+    if (!email) {
+      return "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      return "Incorrect email format";
+    }
+    return "";
+  };
+
+  const passwordValidator = (password: string) => {
+    if (!password) {
+      return "Password is required";
+    } else if (password.length < 8) {
+      return "Password must have a minimum 8 characters";
+    }
+    return "";
+  };
+
+  const confirmPasswordValidator = (
+    confirmPassword: string,
+    password: string
+  ) => {
+    if (!confirmPassword) {
+      return "Confirm password is required";
+    } else if (confirmPassword.length < 8) {
+      return "Confirm password must have a minimum 8 characters";
+    } else if (confirmPassword !== password) {
+      return "Passwords do not match";
+    }
+    return "";
+  };
+
+  useEffect(() => {
+    setFieldErrors({
+      ...fieldErrors,
+      email: emailValidator(registerInfo.email),
+      password: passwordValidator(registerInfo.password),
+      confirmPassword: confirmPasswordValidator(
+        registerInfo.confirmPassword,
+        registerInfo.password
+      ),
+    });
+  }, [registerInfo]);
+
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -30,7 +83,14 @@ const Register = () => {
   };
 
   const handleSubmit = async () => {
-    if (registerInfo.password !== registerInfo.confirmPassword) {
+    const allErrors = Object.values(fieldErrors);
+
+    // Check if there are any error messages
+    if (allErrors.some((error) => error !== "")) {
+      // Join all error messages into a single string
+      const errorMessage = allErrors.join(" ");
+      setErrorMessage(errorMessage);
+    } else if (registerInfo.password !== registerInfo.confirmPassword) {
       setErrorMessage("Passwords do not match!");
     } else {
       setLoading(true);
@@ -38,7 +98,8 @@ const Register = () => {
       await register(registerInfo)
         .then(() => {
           navigate("/login", {
-            state: "Thank you for signing up. Please sign in",
+            state:
+              "Email confirmation is sent, Please verify your email before logging in!",
           });
           setLoading(false); // Stop loading
         })
@@ -51,7 +112,7 @@ const Register = () => {
             password: "",
             confirmPassword: "",
           });
-          alert(`Sorry ${error.message}`);
+          setErrorMessage(`Sorry ${error.message}`);
           setLoading(false); // Stop loading
         });
     }
