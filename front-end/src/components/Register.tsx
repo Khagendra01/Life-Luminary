@@ -96,8 +96,8 @@ const Register = () => {
       // Join all error messages into a single string
       const errorMessage = allErrors.join(" ");
       setErrorMessage(errorMessage);
-    } else if (registerInfo.password !== registerInfo.confirmPassword) {
-      setErrorMessage("Passwords do not match!");
+    } else if (registerInfo.firstName == "" || registerInfo.lastName == "") {
+      setErrorMessage("First Name or Last Name required");
     } else {
       setLoading(true);
       setErrorMessage("");
