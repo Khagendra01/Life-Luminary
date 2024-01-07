@@ -1,7 +1,8 @@
 // src/App.js
 
 import './App.css';
-import DeskScene from './DeskScene';
+import Clock from './Clock';
+import Scene from './Scene';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <h1>3D Desk Landing Page</h1>
       </header>
       <main>
-        <DeskScene />
+        <Clock />
       </main>
     </div>
   );
