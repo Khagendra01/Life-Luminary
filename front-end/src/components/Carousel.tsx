@@ -76,7 +76,7 @@ const Carousel = ({ images }: { images: string[] }) => {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         <div className="col-span-1">
             <img className="w-full h-auto transition duration-500 ease-in-out transform" src={images[currentImage]} alt="carousel" />
         </div>

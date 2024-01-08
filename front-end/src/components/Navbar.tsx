@@ -71,8 +71,11 @@ const Navbar = () => {
                     <div>
                         <ul className='hidden md:flex space-x-12 mx-auto'>
                             {navItems.map((item, index) => (
-                                <li key={index}>
-                                    <a href={`${item.path}`} className='block hover:text-gray-300'>{item.link}</a>
+                                <li key={index} className='transition-all duration-200 transform hover:scale-110'>
+                                    <a href={`${item.path}`} className='block text-lg hover:text-gray-300 hover:bg-black rounded-md px-2 py-1'>
+                                        {item.link}
+                                    </a>
+                                    <div className='h-1 w-full bg-transparent transition-all duration-200 transform hover:bg-primary mt-1'></div>
                                 </li>
                             ))}
                         </ul>
@@ -143,17 +146,18 @@ const Navbar = () => {
                             </button>)}
                     </div>
                 </div>
+                {/* mobile menu */}
+                <div className={`space-y-4 px-4 pt-2 pb-5 bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-in-out overflow-hidden absolute z-50 ${isMenuOpen ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>
+                    {navItems.map((item, index) => (
+                        <div key={index}>
+                            <a href={`${item.path}`} className='block text-sm font-medium text-white hover:text-gray-300 transition-colors duration-200'>{item.link}</a>
+                            <hr />
+                        </div>
+                    ))}
+                </div>
             </nav>
 
-            {/* mobile menu */}
-            <div className={`space-y-4 px-4 pt-24 pb-5 bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-in-out overflow-hidden ${isMenuOpen ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>
-    {navItems.map((item, index) => (
-        <div key={index}>
-            <a href={`${item.path}`} className='block text-sm font-medium text-white hover:text-gray-300 transition-colors duration-200'>{item.link}</a>
-            <hr />
-        </div>
-    ))}
-</div>
+
 
 
 

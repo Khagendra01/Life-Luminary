@@ -8,3 +8,13 @@
 .gradient-button:hover {
     background-position: left bottom;
 }
+
+.fixed-mobile-menu {
+    position: fixed; /* Fix the position */
+    top: 0; /* Stick to the top */
+    width: 100%; /* Take full width */
+    max-height: 100vh; /* Maximum height */
+    overflow-y: auto; /* Enable vertical scroll */
+    z-index: 50; /* Ensure it's above other items */
+  }
+  
