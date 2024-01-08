@@ -27,7 +27,7 @@ const Footer = () => {
 
                     <div className="mb-6 lg:mb-0 lg:w-1/4 lg:mr-20">
                         <h2 className="text-lg font-semibold">About Us</h2>
-                        <p className="mt-4 text-gray-400">Life Luminary is a simple app that lets you record the highlight of your day, particularly instances where you've helped someone else or yourself. The main objective of Life Luminary is to make the world a better place through simple acts of kindness.</p>
+                        <p className="mt-4 text-gray-400">PratiDin is a simple app that lets you record the highlight of your day, particularly instances where you've helped someone else or yourself. The main objective of PratiDin is to make the world a better place through simple acts of kindness.</p>
                     </div>
                     <div className="mb-6 lg:mb-0 lg:w-1/4">
                         <h2 className="text-lg font-semibold">Quick Links</h2>

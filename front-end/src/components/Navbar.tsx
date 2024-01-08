@@ -1,7 +1,7 @@
 
 
 import { useContext, useState } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logoT.png';
 
 import { FaUser } from 'react-icons/fa';
 
@@ -48,7 +48,7 @@ const Navbar = () => {
                 <div className='flex justify-between items-center'>
                     {/* mobile menu */}
                     <div className='flex px-4 justify-between'>
-                        <div className='md:hidden flex items-center justify-end mr-4'>
+                        <div className='md:hidden flex items-center justify-end mr-2'>
                             <button className='mobile-menu-button' onClick={toggleMenu}>
                                 {isMenuOpen ? (
                                     <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -64,7 +64,7 @@ const Navbar = () => {
                         {/* logo */}
                         <div className='flex items-center space-x-3 '>
                             <a href="/" className='text-2xl font-semibold flex items-center space-x-3 text-white'>
-                                <img src={logo} alt="logo" style={{ width: "50px", height: "50px" }} /><span className='md:block hidden'>Life Luminary</span>
+                                <img src={logo} alt="logo" style={{ height: "50px" }} />
                             </a>
                         </div>
                     </div>

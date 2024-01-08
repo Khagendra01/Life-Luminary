@@ -5,7 +5,7 @@ import Carousel from '../components/Carousel';
 
 // Import the images
 import piktar1 from '../img/piktar1.png';
-import piktar2 from '../img/piktar2.png';
+import piktar2 from '../img/piktar1.jpg';
 import piktar3 from '../img/piktar3.png';
 
 

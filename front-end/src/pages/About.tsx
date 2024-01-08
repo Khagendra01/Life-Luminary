@@ -1,4 +1,4 @@
-import logo from "../assets/logo.png";
+import logo from "../assets/logoM.png";
 import typing from "../img/typing.gif";
 import comm from "../img//comm.gif";
 import Footer from "../components/Footer";
@@ -14,29 +14,27 @@ const About = () => {
       <div className="font-sans min-h-screen text-gray-900 bg-gray-100">
         <Navbar />
         <div className="flex flex-col items-center py-12 space-y-8">
-          <img src={logo} alt="Logo" className="w-32 h-32 md:w-48 md:h-48" />
+          <img src={logo} alt="Logo" className=" h-32 md:h-48" />
           <h1 className="text-4xl font-semibold">About Us</h1>
           <p className="mx-4 text-lg text-center">
-            Life Luminary is about more than just documenting your routine -
+            PratiDin is about more than just documenting your routine -
             it's about capturing those moments that make life worth living. It's
             about the small victories, the acts of kindness, the unexpected
             joys. Watering a plant, tidying your room, offering your bus seat to
             an elder, or donating to a cause close to your heart. These are the
-            highlights of our days, and Life Luminary is here to help you
+            highlights of our days, and PratiDin is here to help you
             recognize and appreciate them. But what if you don't have a
-            highlight to share? That's okay. Life Luminary understands. Just by
+            highlight to share? That's okay. PratiDin understands. Just by
             being here, living and breathing, you've made a difference. Each day
-            you're alive is a day worth celebrating, and Life Luminary will make
+            you're alive is a day worth celebrating, and PratiDin will make
             sure you remember that. Our goal is simple: to inspire a ripple of
             positivity, one day at a time. We believe in the power of small
-            actions to make the world a better place, and we've designed Life
-            Luminary to facilitate that belief. But Life Luminary is more than
+            actions to make the world a better place, and we've designed PratiDin to facilitate that belief. But PratiDin is more than
             just a daily journal. It's a tool for reflection and growth. You can
             track your weekly, monthly, or yearly activities, analyze patterns,
             and identify areas for improvement. And when you're ready, you can
             generate a PDF of your entries, share your journey with others, and
-            inspire them to join you in making the world a better place. Life
-            Luminary is more than just an app. It's a movement. It's a
+            inspire them to join you in making the world a better place. PratiDin is more than just an app. It's a movement. It's a
             commitment to conscious living and active kindness. And it's an
             invitation for you to join us in making a difference, one entry each
             day.
@@ -51,7 +49,7 @@ const About = () => {
           <div className='text-center md:text-left'>
             <h2 className='text-3xl font-semibold mb-4'>Our History</h2>
             <p className='text-lg'>
-              Life Luminary was born out of a simple belief: the everyday moments and small acts of kindness in our lives
+              PratiDin was born out of a simple belief: the everyday moments and small acts of kindness in our lives
               often carry the most significance. We recognized that people wanted to capture these moments and reflect on
               them, not just document routines. We saw an opportunity to create a tool that not only helps individuals
               acknowledge these moments but also promotes a ripple of positivity.
@@ -67,7 +65,7 @@ const About = () => {
           <div className='text-center md:text-left'>
             <h2 className='text-3xl font-semibold mb-4'>Our Mission</h2>
             <p className='text-lg'>
-              Our mission at Life Luminary is to inspire positivity, one day at a time. We believe in the power of small
+              Our mission at PratiDin is to inspire positivity, one day at a time. We believe in the power of small
               actions to make the world a better place. We aim to help our users recognize and appreciate the little
               victories, acts of kindness, and unexpected joys in their lives.
             </p>
@@ -84,7 +82,7 @@ const About = () => {
           <div className='text-center md:text-left'>
             <h2 className='text-3xl font-semibold mb-4'>Our Vision</h2>
             <p className='text-lg'>
-              Our vision for Life Luminary is to be more than just an app - we aspire to be a movement, a commitment to
+              Our vision for PratiDin is to be more than just an app - we aspire to be a movement, a commitment to
               conscious living, and active kindness. We envision a world where every individual appreciates the value of
               their daily actions and experiences, recognizing their potential to inspire positivity and make the world a
               better place.
