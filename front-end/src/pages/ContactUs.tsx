@@ -17,16 +17,14 @@ const ContactUs = () => {
 
     const handleSubmit = async() => {
         setLoading(true);
-        console.log(contactInfo)
         await contactUs(contactInfo)
         .then(() => {
-            alert("Contact Us report Posted")
-            setContactInfo(initInfo)
+            alert("Contact Us report Posted")   
         })
         .catch((error) => {
             alert(`Sorry ${error.message}`);
           });
-
+        setContactInfo(initInfo)
         setLoading(false);
     }
 
@@ -36,7 +34,7 @@ const ContactUs = () => {
             <div className="flex flex-col items-center py-2">
                 <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3">
                     <h2 className="text-2xl font-bold mb-5 text-gray-900">Contact Us</h2>
-                    <div className="space-y-5" onSubmit={handleSubmit}>
+                    <div className="space-y-5">
                         <input className="w-full p-2 border border-gray-300 rounded-lg" type="text" id ="firstName" name ="firstName" placeholder="First Name" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)}/>
                         <input className="w-full p-2 border border-gray-300 rounded-lg" type="text" id ="lastName" name ="lastName" placeholder="Last Name" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)} />
                         <input className="w-full p-2 border border-gray-300 rounded-lg" type="email" id ="email" name="email" placeholder="Email" required onChange={(e) => handleloginInfoChange(e.target.name as keyof ContactInfo, e.target.value)} />

@@ -76,9 +76,9 @@ const Carousel = ({ images }: { images: string[] }) => {
     }
 
     return (
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         <div className="col-span-1">
-            <img className="w-full h-auto transition duration-500 ease-in-out transform" src={images[currentImage]} alt="carousel" />
+            <img className="w-auto h-auto transition duration-500 ease-in-out transform" src={images[currentImage]} alt="carousel" />
         </div>
         <div className="col-span-1 flex flex-col items-center justify-center">
             <div className="flex flex-row items-center justify-center">
@@ -89,9 +89,12 @@ const Carousel = ({ images }: { images: string[] }) => {
                     <div className="flex flex-row items-center justify-center">
                         {images.map((image, index) => {
                             return (
+                                <>
+                               {false && <p> { image }</p>}
                                 <button key={index} onClick={() => selectImage(index)} className={`bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 ${index === currentImage ? 'bg-gray-300' : ''}`}>
                                     {index + 1}
                                 </button>
+                                </>
                             )
                         })}
                     </div>

@@ -8,6 +8,8 @@ import { PostInfo } from "../models/postModel";
 import { getDailyPost } from "../api/activity";
 import { useNavigate } from "react-router-dom";
 
+import imgBg from "../img/home.jpg"
+
 const DailyNote = () => {
   const { user } = useContext(AuthContext) || {};
 
@@ -74,13 +76,13 @@ const DailyNote = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-between items-center bg-gray-900 py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48 mt-5">
-        <div className="flex flex-col items-center text-left space-y-4 calendar-box mb-4">
-          <h1 className="text-4xl font-semibold text-black"> {month} </h1>
-          <h1 className="text-4xl font-semibold text-black">
+      <div className="flex flex-col justify-between items-center py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48 mt-5" style={{ backgroundImage: `url(${imgBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="flex flex-col items-center text-left space-y-4 calendar-box mb-4 bg-primary">
+          <h1 className="text-4xl font-semibold text-white"> {month} </h1>
+          <h1 className="text-4xl font-semibold text-white">
             <FaRegCalendarAlt />
           </h1>
-          <h1 className="text-3xl font-semibold text-black">{day}</h1>
+          <h1 className="text-3xl font-semibold text-white">{day}</h1>
         </div>
         <textarea
           value={ user ? content : ""}

@@ -156,14 +156,7 @@ const Navbar = () => {
                     ))}
                 </div>
             </nav>
-
-
-
-
-
-
-
-
+            <div className='mt-20'></div> {/* margin added*/}
         </>
     );
 }
