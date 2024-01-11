@@ -12,6 +12,8 @@ import {
 import { AuthContext } from "../App";
 import { getAllUser } from "../api/activity";
 
+import "./styles/feed.css";
+
 const Feed: React.FC = () => {
   const { user } = useContext(AuthContext) || {};
 
@@ -52,9 +54,9 @@ const Feed: React.FC = () => {
       await postReact(newReact)
         .then(() => {
           getAllReact(postId);
-          if(user){
+          if (user) {
             getMyReact(postId);
-          }         
+          }
         })
         .catch(() => {
           console.log("try again");
@@ -137,11 +139,11 @@ const Feed: React.FC = () => {
   useEffect(() => {
     const fetchReactions = async () => {
       if (posts) {
-        console.log(posts)
+        console.log(posts);
         await Promise.all(
           posts.map((post) => {
             getAllReact(post.id);
-            getUsers(post.id, post.userID);     
+            getUsers(post.id, post.userID);
             getMyReact(post.id);
           })
         );
@@ -166,16 +168,22 @@ const Feed: React.FC = () => {
                     key={post.id}
                     className="border rounded shadow p-4 space-y-2"
                   >
-                    <h3 className="text-xl font-bold">
-                      {postUser[post.id]?.firstName}
-                      {postUser[post.id]?.lastName}
-                    </h3>
-                    <p className="text-base">{post.content}</p>
+                    <div id="paper">
+                      <div id="pattern">
+                        <div id="content">
+                          <p >{post.content}</p>
+                          <h3 className="text-xl font-bold float-right" >
+                           - {postUser[post.id]?.firstName}
+                            {postUser[post.id]?.lastName}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
                     <div className="flex items-center justify-between">
                       <div>
                         <button
                           onClick={() => handleGoodJob(post.id)}
-                          className={`px-2 py-1 ${
+                          className={`btn-react px-2 py-1 ${
                             isGoodJob[post.id] !== undefined &&
                             isGoodJob[post.id]
                               ? "bg-secondary"
@@ -188,8 +196,8 @@ const Feed: React.FC = () => {
                       </div>
                       <div>
                         <button
-                          onClick={() => handleLove(post.id)}                         
-                          className={`px-2 py-1 ${
+                          onClick={() => handleLove(post.id)}
+                          className={`btn-react px-2 py-1 ${
                             isLove[post.id] !== undefined && isLove[post.id]
                               ? "bg-secondary"
                               : "bg-red-500"

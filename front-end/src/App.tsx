@@ -38,6 +38,7 @@ function App() {
       getData();
       setIsLoading(false)
     }   
+    window.speechSynthesis.cancel();
   }, []);
 
   return (
