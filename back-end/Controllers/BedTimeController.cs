@@ -3,10 +3,16 @@ using back_end.Database;
 using Microsoft.AspNetCore.Mvc;
 using back_end.Classes;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Azure.AI.OpenAI;
-using Azure;
+using OpenAI_API;
+using OpenAI_API.Completions;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using OpenAI_API.Chat;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Extensions.Configuration;
+using System.Text.RegularExpressions;
+using ChatRequest = back_end.Classes.ChatRequest;
 
 namespace back_end.Controllers
 {
@@ -28,6 +34,8 @@ namespace back_end.Controllers
             modelname = configuration["OpenAIConfig:modelname"];
         }
 
+        
+
         [HttpGet("story")]
         public async Task<Classes.Response<StoryRes>> getStory([FromQuery] ActivityReq actReq)
         {
@@ -35,28 +43,38 @@ namespace back_end.Controllers
             {
                 Post post = await _dbContext.Post.FirstOrDefaultAsync(u => u.UserID == actReq.UserId && u.DateTime == actReq.DateTime);
 
-                List<Message> messages = new List<Message>();  
-
-                Message newMessage = new Message();
-                newMessage.Role = "user";
-                newMessage.Content = "Generate a story if somebody story of the day is It was really awfulday. with \"title: \" and \"content:\"";
-
-                messages.Add(newMessage);
-
-
                 if (post != null)
                 {
-                    StoryRes story = new StoryRes()
+                        string content = "Generate a story if somebody story of the day is It was really awfulday. with \"title: \" and \"content:\"";
+
+                    ChatRequest chatRequest = new ChatRequest()
                     {
-                        Title= "This is title",
-                        Content= "This is content"
+                        Model = modelname,
+                        Messages = new List<Message>()
+                        {
+                         new Message()
+                          {
+                          Role = "user",
+                          Content = content
+                          }
+                        }
                     };
-                    return new Classes.Response<StoryRes>("Retrieved successfully", story, true);
+
+                    Message gptResponse = await GetGPTResponse(chatRequest);
+
+
+                    if (gptResponse != null)
+                    {
+                        string responseMessage = gptResponse.Content;
+                        StoryRes story = ParseResponse(responseMessage);
+                        return new Classes.Response<StoryRes>("Retrieved successfully", story, true);
+
+                    }
+
                 }
-                else
-                {
                     return new Classes.Response<StoryRes>("No posts found", null, true);
-                }
+            
+                
             }
             catch (Exception ex)
             {
@@ -65,59 +83,75 @@ namespace back_end.Controllers
 
         }
 
-         private StoryRes ParseResponse(string response)
+        private async Task<Message> GetGPTResponse(ChatRequest jsonBody)
+        {
+            // Initialize an HTTP client to interact with the GPT API.
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(endpoint);
+            client.DefaultRequestHeaders.Accept.Clear();
+
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + key);
+
+            // Prepare an HTTP request with the JSON body containing conversation history and the user's message.
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress);
+            request.Content = new StringContent(JsonConvert.SerializeObject(jsonBody), Encoding.UTF8, "application/json");
+
+            // Send the request and process the response.
+            var response = await client.SendAsync(request).ConfigureAwait(false);
+            var responseString = string.Empty;
+            try
+            {
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var responseJson = JObject.Parse(responseString);
+                return JsonConvert.DeserializeObject<Message>(responseJson["choices"][0]["message"].ToString());
+            }
+            catch (HttpRequestException ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                return null;
+            }
+
+        }
+
+        private StoryRes ParseResponse(string response)
         {
             StoryRes thisStory = new StoryRes();
 
-            // Split the response into lines
-            string[] lines = response.Split('\n');
+            string[] parts = response.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string line in lines)
+            // Assign the title and content to the StoryRes object
+            if (parts.Length > 0)
             {
-                // Split each line into key and value
-                string[] parts = line.Split(':');
-                if (parts.Length == 2)
-                {
-                    string key = parts[0].Trim();
-                    string value = parts[1].Trim();
-
-                    // Assign values to the Explore object based on the key
-                    switch (key)
-                    {
-                        case "Title":
-                            thisStory.Title = value;
-                            break;
-                        case "Content":
-                            thisStory.Content = value;
-                            break;
-                            // Add more cases for additional keys if needed
-                    }
-                }
+                thisStory.Title = parts[0].Replace("Title: ", "").Trim();
+            }
+            if (parts.Length > 1)
+            {
+                string originalString = string.Join("\n\n", parts.Skip(1)).Trim();
+                string trimmedString = originalString.Substring(8);
+                thisStory.Content = trimmedString;
             }
 
             return thisStory;
         }
 
-        private StoryRes GetStoryFromAI(List<Message> messages)
+        private string extractJsonFromMessage(string responseMessage)
         {
-            try
+            // Regualr expression matching to extract the json part of the response message.
+            string pattern = @"\{[^{}]+\}";
+            Match match = Regex.Match(responseMessage, pattern);
+
+            if (match.Success)
             {
-                List<ChatMessage> chatMessages = _mapper.Map<List<ChatMessage>>(messages);
-                OpenAIClient client = new(new Uri(endpoint), new AzureKeyCredential(key));
-                var chatCompletionsOptions = new ChatCompletionsOptions(chatMessages);
-                var response = client.GetChatCompletions(deploymentOrModelName: modelname, chatCompletionsOptions);
-
-
-                StoryRes exploreInfo = ParseResponse(response.Value.Choices[0].Message.Content);
-
-
-                return exploreInfo;
+                return match.Value;
             }
-            catch (Exception ex)
+            else
             {
+                // Handle the case where no JSON object is found
                 return null;
             }
         }
+
 
     }
 

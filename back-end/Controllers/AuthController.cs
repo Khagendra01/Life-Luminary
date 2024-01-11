@@ -111,6 +111,18 @@ namespace ProfessorAIAPI.Controllers
                 var result = await _signInManager.PasswordSignInAsync(info.Username, info.Password, false, false);
                 if (!result.Succeeded)
                 {
+                    var goodUser = await _userManager.FindByEmailAsync(info.Username);
+                    if (goodUser != null)
+                    {
+                        UserDetail checking = _mapper.Map<UserDetail>(goodUser);
+                        result = await _signInManager.PasswordSignInAsync(checking.UserName, info.Password, false, false);
+                        if(result.Succeeded)
+                        {
+                            checking.AccessToken = GenerateAccessToken(goodUser);
+                            return new Response<UserDetail>("Login successfull", checking, true);
+                        }
+
+                    }
                     return new Response<UserDetail>(result.ToString(), null, false);
                 }
                 User user = await _userManager.FindByNameAsync(info.Username);

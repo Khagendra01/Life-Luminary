@@ -83,3 +83,4 @@ C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\MailKit.dll
 C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\MimeKit.dll
 C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\NETCore.MailKit.dll
 C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\OpenAI_API.dll

@@ -78,6 +78,14 @@ namespace back_end.Controllers
                 {
                     // If the record does not exist, add a new one
                     UserReact newPost = _mapper.Map<UserReact>(postReact);
+                    if (postReact.Change == "goodJob")
+                    {
+                        newPost.isGoodJob = true;
+                    }
+                    else
+                    {
+                        newPost.isLove = true;
+                    }
                     _dbContext.Add(newPost);
                 }
 
