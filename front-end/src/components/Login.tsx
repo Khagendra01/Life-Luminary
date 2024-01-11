@@ -46,7 +46,12 @@ const Login = () => {
       if (error.message === "NotAllowed") {
         setErrorMessage(`Please, verify your email before loggin in!`);
       } else {
-        setErrorMessage(`Sorry ${error.message}`);
+        if(error.message === "Failed")
+        {
+          setErrorMessage(`Invalid Login credentials!`);
+        }else{
+          setErrorMessage(`Sorry ${error.message}`);
+        }
       }
       setloginInfo({ userName: "", password: "" });
     } finally {

@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="mt-10 flex flex-col items-center justify-center h-screen">
         <img
           src={notfound}
           alt="404 Illustration"

@@ -141,9 +141,7 @@ const Feed: React.FC = () => {
         await Promise.all(
           posts.map((post) => {
             getAllReact(post.id);
-            if(user){
-              getUsers(post.id, post.userID);
-            }         
+            getUsers(post.id, post.userID);     
             getMyReact(post.id);
           })
         );
@@ -151,7 +149,7 @@ const Feed: React.FC = () => {
     };
 
     fetchReactions();
-  }, [posts]);
+  }, [posts, user]);
 
   return (
     <>
@@ -177,7 +175,6 @@ const Feed: React.FC = () => {
                       <div>
                         <button
                           onClick={() => handleGoodJob(post.id)}
-                          disabled={false}
                           className={`px-2 py-1 ${
                             isGoodJob[post.id] !== undefined &&
                             isGoodJob[post.id]
@@ -191,8 +188,7 @@ const Feed: React.FC = () => {
                       </div>
                       <div>
                         <button
-                          onClick={() => handleLove(post.id)}
-                          disabled={user ? false : true}
+                          onClick={() => handleLove(post.id)}                         
                           className={`px-2 py-1 ${
                             isLove[post.id] !== undefined && isLove[post.id]
                               ? "bg-secondary"
