@@ -1,19 +1,24 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import { register } from "../api/authApi.js";
+import { googleRegister, register } from "../api/authApi.js";
 import { useNavigate } from "react-router-dom";
 
-import { RegisterInfo } from "../models/authModel";
+import { GoogleUserInfo, RegisterInfo } from "../models/authModel";
 
-import signImg from "../assets//signup.svg"
+import signImg from "../assets//signup.svg";
 
-import { AiOutlineTwitter } from "react-icons/ai";
-import { BiLogoFacebook } from "react-icons/bi";
+import { useGoogleLogin } from "@react-oauth/google";
 
+import { AiOutlineGoogle } from "react-icons/ai";
+import { AuthContext } from "../App.js";
+import axios from "axios";
+//import { BiLogoFacebook } from "react-icons/bi";
 
 const Register = () => {
+  const { setUser } = useContext(AuthContext) || {};
+
   const [registerInfo, setRegisterInfo] = useState<RegisterInfo>({
     firstName: "",
     lastName: "",
@@ -88,6 +93,45 @@ const Register = () => {
     setRegisterInfo({ ...registerInfo, [name]: value });
   };
 
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        console.log(tokenResponse)
+        setLoading(true);
+        const apiResponse = await axios
+          .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+          })
+          .then((res) => res.data);
+          console.log(apiResponse)
+          const userInfo: GoogleUserInfo = {
+            sub: apiResponse.sub,
+            name: apiResponse.name,
+            given_name: apiResponse.given_name,
+            family_name: apiResponse.family_name || "", // Use "" if family_name is undefined
+            picture: apiResponse.picture,
+            email: apiResponse.email,
+            email_verified: apiResponse.email_verified,
+            locale: apiResponse.locale
+          };
+        const res = await googleRegister(userInfo);
+        console.log(res)
+        const token = res?.accessToken;
+        if (token !== undefined) {
+          localStorage.setItem("accessToken", token);
+          setUser(res);
+          navigate("/");
+        }
+      } catch (error) {
+        setErrorMessage(`Sorry ${error.message}`);
+        setLoading(false); // Stop loading
+      }
+    },
+    onError: () => {
+      setErrorMessage(`Sorry try again`);
+    },
+  });
+
   const handleSubmit = async () => {
     const allErrors = Object.values(fieldErrors);
 
@@ -124,14 +168,15 @@ const Register = () => {
     }
   };
 
+
   return (
     <>
       <Navbar />
-      <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">     
-      <div className="md:w-1/3 max-w-sm">
-        <div className="text-center md:text-left">
-          <label className="mr-1">Sign in with</label>
-          <button
+      <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+        <div className="md:w-1/3 max-w-sm">
+          <div className="text-center md:text-left">
+            <label className="mr-1">Sign in with</label>
+            {/* <button
             type="button"
             className="mx-1 h-9 w-9  rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
           >
@@ -139,130 +184,129 @@ const Register = () => {
               size={20}
               className="flex justify-center items-center w-full"
             />
-          </button>
-          <button
-            type="button"
-            className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
-            <AiOutlineTwitter
-              size={20}
-              className="flex justify-center items-center w-full"
-            />
-          </button>
-        </div>
-        <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-          <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
-            Or
-          </p>
-        </div>
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded" mt-4
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          value={registerInfo.firstName}
-                onChange={(e) =>
-                  handleRegisterInfoChange(
-                    e.target.name as keyof RegisterInfo,
-                    e.target.value
-                  )
-                }
-        />
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={registerInfo.lastName}
-                onChange={(e) =>
-                  handleRegisterInfoChange(
-                    e.target.name as keyof RegisterInfo,
-                    e.target.value
-                  )
-                }
-        />
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={registerInfo.email}
-                onChange={(e) =>
-                  handleRegisterInfoChange(
-                    e.target.name as keyof RegisterInfo,
-                    e.target.value
-                  )
-                }
-        />
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="text"
-          name="userName"
-          placeholder="Username"
-          value={registerInfo.userName}
-                onChange={(e) =>
-                  handleRegisterInfoChange(
-                    e.target.name as keyof RegisterInfo,
-                    e.target.value
-                  )
-                }
-        />
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={registerInfo.password}
-                onChange={(e) =>
-                  handleRegisterInfoChange(
-                    e.target.name as keyof RegisterInfo,
-                    e.target.value
-                  )
-                }
-        />
-         <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={registerInfo.confirmPassword}
-                onChange={(e) =>
-                  handleRegisterInfoChange(
-                    e.target.name as keyof RegisterInfo,
-                    e.target.value
-                  )
-                }
-        />
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        <div className="text-center md:text-left">
-          <button
-            className="mt-4 bg-gradient-to-r from-primary to-secondary hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
-            onClick={handleSubmit}
-          >
-            {loading ? (
+          </button> */}
+            <button
+              type="button"
+              className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
+            >
+              <AiOutlineGoogle
+                size={20}
+                className="flex justify-center items-center w-full"
+                onClick={() => googleLogin()}
+              />
+            </button>
+          </div>
+          <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
+              Or
+            </p>
+          </div>
+          <input
+            className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
+            mt-4
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={registerInfo.firstName}
+            onChange={(e) =>
+              handleRegisterInfoChange(
+                e.target.name as keyof RegisterInfo,
+                e.target.value
+              )
+            }
+          />
+          <input
+            className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={registerInfo.lastName}
+            onChange={(e) =>
+              handleRegisterInfoChange(
+                e.target.name as keyof RegisterInfo,
+                e.target.value
+              )
+            }
+          />
+          <input
+            className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={registerInfo.email}
+            onChange={(e) =>
+              handleRegisterInfoChange(
+                e.target.name as keyof RegisterInfo,
+                e.target.value
+              )
+            }
+          />
+          <input
+            className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
+            type="text"
+            name="userName"
+            placeholder="Username"
+            value={registerInfo.userName}
+            onChange={(e) =>
+              handleRegisterInfoChange(
+                e.target.name as keyof RegisterInfo,
+                e.target.value
+              )
+            }
+          />
+          <input
+            className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={registerInfo.password}
+            onChange={(e) =>
+              handleRegisterInfoChange(
+                e.target.name as keyof RegisterInfo,
+                e.target.value
+              )
+            }
+          />
+          <input
+            className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={registerInfo.confirmPassword}
+            onChange={(e) =>
+              handleRegisterInfoChange(
+                e.target.name as keyof RegisterInfo,
+                e.target.value
+              )
+            }
+          />
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          <div className="text-center md:text-left">
+            <button
+              className="mt-4 bg-gradient-to-r from-primary to-secondary hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+              onClick={handleSubmit}
+            >
+              {loading ? (
                 <i className="fa fa-spinner fa-spin w-12" /> // Use a rotating loading icon
               ) : (
                 "Sign Up"
               )}
-          </button>
+            </button>
+          </div>
+          <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+            Already a user?{" "}
+            <a
+              className="text-red-600 hover:underline hover:underline-offset-4"
+              href="/login"
+            >
+              Log In
+            </a>
+          </div>
         </div>
-        <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-          Already a user?{" "}
-          <a
-            className="text-red-600 hover:underline hover:underline-offset-4"
-            href="/login"
-          >
-            Log In
-          </a>
+        <div className="md:w-1/3 max-w-sm">
+          <img src={signImg} alt="Sample image" />
         </div>
-      </div>
-      <div className="md:w-1/3 max-w-sm">
-        <img
-          src={signImg}
-          alt="Sample image"
-        />
-      </div>
-    </section>
+      </section>
 
       <Footer />
     </>

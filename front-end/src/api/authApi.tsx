@@ -1,6 +1,6 @@
 import instance from "./instance";
 
-import { RegisterInfo, LoginInfo, LogInResponse } from "../models/authModel";
+import { RegisterInfo, LoginInfo, LogInResponse, GoogleUserInfo } from "../models/authModel";
 
 function register(registerInfo : RegisterInfo) {
   return instance
@@ -12,6 +12,22 @@ function register(registerInfo : RegisterInfo) {
       throw new Error(error);
     });
 }
+
+async function googleRegister(googleRes: GoogleUserInfo): Promise<LogInResponse | null> {
+ 
+      try {
+        const response = await instance.post<LogInResponse>("/api/google/register",  googleRes);
+        if (response) {
+          return response as unknown as LogInResponse; // assert the response as LogInResponse
+        } else {
+          console.error("Registration failed");
+          return null;
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+}
+
 
 async function login(loginInfo: LoginInfo): Promise<LogInResponse | null> {
   try {
@@ -44,4 +60,4 @@ async function refreshLogin(): Promise<LogInResponse | null> {
   
 
 
-  export {register, login, refreshLogin}
+  export {register, googleRegister, login, refreshLogin}

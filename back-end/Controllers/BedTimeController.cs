@@ -45,7 +45,7 @@ namespace back_end.Controllers
 
                 if (post != null)
                 {
-                        string content = "Generate a story if somebody story of the day is It was really awfulday. with \"title: \" and \"content:\"";
+                        string content = "Generate a bed time story to uplift and motivate them if somebody story of the day is" + post.Content + ". with \"title: \" and \"content:\"";
 
                     ChatRequest chatRequest = new ChatRequest()
                     {
@@ -72,7 +72,10 @@ namespace back_end.Controllers
                     }
 
                 }
-                    return new Classes.Response<StoryRes>("No posts found", null, true);
+                StoryRes storyRes = new StoryRes();
+                storyRes.Title = "Post not found";
+                storyRes.Content = "Please enter your daily post in order to get the story";
+                    return new Classes.Response<StoryRes>("No posts found", storyRes, true);
             
                 
             }

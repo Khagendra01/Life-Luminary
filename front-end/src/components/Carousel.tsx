@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import "./styles/carousel.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../App";
+
+interface caroChange {
+    buttonS: string;
+    buttonSRef: string
+}
 
 const Carousel = ({ images }: { images: string[] }) => {
+    
+    const { user } = useContext(AuthContext) || {};
+
+    const [ caroChange, setCaroChange] = useState<caroChange | undefined>({ buttonS: "Sign Up", buttonSRef: "/register"});
 
     const navigate = useNavigate();
     // Create a state to keep track of the current image
@@ -19,8 +29,8 @@ const Carousel = ({ images }: { images: string[] }) => {
               content: "changes you and people around you!",
               buttonF: "Learn More",
               buttonFRef: "/about",
-              buttonS: "Sign Up",
-              buttonSRef: "/register"
+              buttonS: caroChange.buttonS,
+              buttonSRef: caroChange.buttonSRef
             });
             break;
           case 1:
@@ -44,8 +54,18 @@ const Carousel = ({ images }: { images: string[] }) => {
             });
             break;
         }
-      }, [currentImage]);
+      }, [currentImage, caroChange]);
 
+
+      useEffect(() => {
+        if (user) {
+            setCaroChange(prevCaroChange => ({
+                ...prevCaroChange,
+                buttonS: "Need Help?",
+                buttonSRef: "/contact"
+            }));
+        }
+      }, [user])
 
     // Create a function to handle the next image
     const nextImage = () => {

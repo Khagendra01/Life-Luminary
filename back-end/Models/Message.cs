@@ -19,9 +19,9 @@ namespace back_end.Models
         public Message(IEnumerable<string> to, string subject, string content)
         {
             To = new List<MailboxAddress>();
-            To.AddRange(to.Select(x => new MailboxAddress("email", x)));
+            To.AddRange(to.Select(x => new MailboxAddress("User", x)));
             Subject = subject;
-            Content = content;
+            Content = "Please verify your email address by clicking this link, and go back to the website to continue...  " + content;
         }
     }
 }

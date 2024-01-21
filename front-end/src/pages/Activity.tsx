@@ -39,6 +39,7 @@ const Activity: React.FC = () => {
         <Calendar
           className="bg-gray-200 text-gray-700 rounded-lg p-8 m-4 shadow-lg border-2 border-gray-300 font-sans hover:shadow-xl transition-all duration-200"
           onClickDay={(value: Date) => {
+            console.log(value)
             const dateString = value.toISOString().split("T")[0];
             const event = data?.find(
               (event) => event.dateTime.split("T")[0] === dateString
@@ -66,8 +67,6 @@ const Activity: React.FC = () => {
       )}
 
       <DataFilter data={data} />
-
-
 
       <Footer />
     </>

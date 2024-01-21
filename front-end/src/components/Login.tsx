@@ -1,15 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { LoginInfo } from "../models/authModel";
+import { GoogleUserInfo, LoginInfo } from "../models/authModel";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { useContext, useState } from "react";
-import { login } from "../api/authApi";
+import { googleRegister, login } from "../api/authApi";
 import { AuthContext } from "../App";
 
-import { AiOutlineTwitter } from "react-icons/ai";
-import { BiLogoFacebook } from "react-icons/bi";
+import { AiOutlineGoogle } from "react-icons/ai";
+// import { AiOutlineTwitter } from "react-icons/ai";
+// import { BiLogoFacebook } from "react-icons/bi";
 
 import loginimg from "../assets/login.svg"
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const Login = () => {
   const [loginInfo, setloginInfo] = useState<LoginInfo>({
@@ -30,6 +33,42 @@ const Login = () => {
   const handleloginInfoChange = (name: keyof LoginInfo, value: string) => {
     setloginInfo({ ...loginInfo, [name]: value });
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        setLoading(true);
+        const apiResponse = await axios
+          .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+          })
+          .then((res) => res.data);
+          const userInfo: GoogleUserInfo = {
+            sub: apiResponse.sub,
+            name: apiResponse.name,
+            given_name: apiResponse.given_name,
+            family_name: apiResponse.family_name || "", // Use "" if family_name is undefined
+            picture: apiResponse.picture,
+            email: apiResponse.email,
+            email_verified: apiResponse.email_verified,
+            locale: apiResponse.locale
+          };
+        const res = await googleRegister(userInfo);
+        const token = res?.accessToken;
+        if (token !== undefined) {
+          localStorage.setItem("accessToken", token);
+          setUser(res);
+          navigate("/");
+        }
+      } catch (error) {
+        setErrorMessage(`Sorry ${error.message}`);
+        setLoading(false); // Stop loading
+      }
+    },
+    onError: () => {
+      setErrorMessage(`Sorry try again`);
+    },
+  });
 
   const handleSubmit = async () => {
     try {
@@ -75,23 +114,15 @@ const Login = () => {
         <div className="text-center md:text-left">
           <label className="mr-1">Sign in with</label>
           <button
-            type="button"
-            className="mx-1 h-9 w-9  rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
-            <BiLogoFacebook
-              size={20}
-              className="flex justify-center items-center w-full"
-            />
-          </button>
-          <button
-            type="button"
-            className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
-            <AiOutlineTwitter
-              size={20}
-              className="flex justify-center items-center w-full"
-            />
-          </button>
+              type="button"
+              className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
+            >
+              <AiOutlineGoogle
+                size={20}
+                className="flex justify-center items-center w-full"
+                onClick={() => googleLogin()}
+              />
+            </button>
         </div>
         <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
           <p className="mx-4 mb-0 text-center font-semibold text-slate-500">

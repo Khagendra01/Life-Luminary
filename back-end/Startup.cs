@@ -48,13 +48,14 @@ namespace ProfessorAIAPI
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
                     ValidAudience = Configuration["JWT:audience"],
                     ValidIssuer = Configuration["JWT:issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:secret"]))
                 };
             });
+
 
             //email configs
 

@@ -139,7 +139,6 @@ const Feed: React.FC = () => {
   useEffect(() => {
     const fetchReactions = async () => {
       if (posts) {
-        console.log(posts);
         await Promise.all(
           posts.map((post) => {
             getAllReact(post.id);
@@ -171,6 +170,8 @@ const Feed: React.FC = () => {
                     <div id="paper">
                       <div id="pattern">
                         <div id="content">
+                        <p className="text-sm float-right" >{post.dateTime}</p>
+                        <br></br>
                           <p >{post.content}</p>
                           <h3 className="text-xl font-bold float-right" >
                            - {postUser[post.id]?.firstName}

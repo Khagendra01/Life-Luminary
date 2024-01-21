@@ -12,6 +12,8 @@ using back_end.Services;
 using back_end.Models;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth;
 
 namespace ProfessorAIAPI.Controllers
 {
@@ -64,7 +66,7 @@ namespace ProfessorAIAPI.Controllers
                     //Add Token to Verify the email ....
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var confirmationLink = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/api/Auth/ConfirmEmail?token={WebUtility.UrlEncode(token)}&email={WebUtility.UrlEncode(user.Email)}";
-                    var message = new back_end.Models.Message(new string[] { user.Email! }, "Confirmation email link", confirmationLink!);
+                    var message = new back_end.Models.Message(new string[] { user.Email! }, "Complete Your Registration by Verifying Your Email", confirmationLink!);
                     _emailService.SendEmail(message);
                     return new Response<bool>("User created and email sent succesfully", true, true);
                 }
@@ -80,6 +82,7 @@ namespace ProfessorAIAPI.Controllers
 
 
         }
+
 
         [HttpGet("ConfirmEmail")]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
@@ -158,7 +161,6 @@ namespace ProfessorAIAPI.Controllers
                 return new Response<UserDetail>("User not registered", null, false);
             }
         }
-
 
 
         private string GenerateAccessToken(User user)

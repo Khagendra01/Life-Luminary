@@ -4,6 +4,10 @@ import { FeedPosts } from "../models/postModel";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+import front from "../img/front.png"
+import mid from "../img/mid.png"
+import back from "../img/back.png"
+
 import "./styles/datafilter.css"
 
 interface DataProps {
@@ -40,9 +44,23 @@ const DataFilter: React.FC<DataProps> = ({ data }) => {
 
   const downloadPDF = () => {
     const doc = new jsPDF();
+
+    // Add a front page
+    doc.addImage(front, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+
+    doc.addPage();
+    // Add a new page for the table content
+    doc.addImage(mid, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
     autoTable(doc, { html: tableRef.current ?? "" });
-    doc.save("filteredData.pdf");
-  };
+
+    // Add a last page
+    doc.addPage();
+    doc.addImage(back, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+
+    // Save the PDF
+    doc.save("PratidinReport.pdf");
+};
+
 
   const filterByMonth = (month: string) => {
     setSelectedMonth(month);

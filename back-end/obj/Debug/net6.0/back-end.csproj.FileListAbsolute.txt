@@ -84,3 +84,11 @@ C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\MimeKit.dll
 C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\NETCore.MailKit.dll
 C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\OpenAI_API.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\Google.Apis.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\Google.Apis.Auth.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\Google.Apis.Core.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\System.Management.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Management.dll
+C:\Users\Khage\OneDrive\Documents\back-end\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll

@@ -8,7 +8,7 @@ import { PostInfo } from "../models/postModel";
 import { getDailyPost } from "../api/activity";
 import { useNavigate } from "react-router-dom";
 
-import imgBg from "../img/home.jpg"
+import imgBg from "../img/home.jpg";
 
 const DailyNote = () => {
   const { user } = useContext(AuthContext) || {};
@@ -25,15 +25,18 @@ const DailyNote = () => {
   const day = today.getDate();
 
   const reloadPost = async () => {
-    const currentDate: Date = new Date();
-    const formattedDate: string = currentDate.toISOString().split("T")[0];
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+
     await getDailyPost(user?.id, formattedDate)
       .then((res) => {
         setContent(res?.content);
-        if(res?.content != null)
-        {
-          console.log(res?.content)
-          setErrorMessage("Your previous post for today!! Have a nice day :) ")
+        if (res?.content != null) {
+          setErrorMessage("Your previous post for today!! Have a nice day :) ");
         }
       })
       .catch((error) => {
@@ -48,8 +51,12 @@ const DailyNote = () => {
   const handleSubmit = async () => {
     if (content != "") {
       if (user) {
-        const currentDate: Date = new Date();
-        const formattedDate: string = currentDate.toISOString().split("T")[0];
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+        const day = String(currentDate.getDate()).padStart(2, "0");
+
+        const formattedDate = `${year}-${month}-${day}`;
         const postRequest: PostInfo = {
           userId: user?.id,
           dateTime: formattedDate,
@@ -69,14 +76,21 @@ const DailyNote = () => {
         alert("Please login to your account before creating a post");
         navigate("./login");
       }
-    }else{
-      setErrorMessage("please enter the input in order to post")
+    } else {
+      setErrorMessage("please enter the input in order to post");
     }
   };
 
   return (
     <>
-      <div className="flex flex-col justify-between items-center py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48 mt-5" style={{ backgroundImage: `url(${imgBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div
+        className="flex flex-col justify-between items-center py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48 mt-5"
+        style={{
+          backgroundImage: `url(${imgBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="flex flex-col items-center text-left space-y-4 calendar-box mb-4 bg-primary">
           <h1 className="text-4xl font-semibold text-white"> {month} </h1>
           <h1 className="text-4xl font-semibold text-white">
@@ -85,7 +99,7 @@ const DailyNote = () => {
           <h1 className="text-3xl font-semibold text-white">{day}</h1>
         </div>
         <textarea
-          value={ user ? content : ""}
+          value={user ? content : ""}
           onChange={(e) => setContent(e.target.value)}
           className="w-full h-full bg-gray-200 rounded-md px-4 py-2 mb-4"
           placeholder="Share your amazing story of the day..."
@@ -99,7 +113,7 @@ const DailyNote = () => {
           <option value="true">Public</option>
           <option value="false">Anonymous</option>
         </select>
-        <p className="text-red-500">{ user && errorMessage}</p>
+        <p className="text-red-500">{user && errorMessage}</p>
         <div className="flex justify-center items-center space-x-4">
           <button
             onClick={handleSubmit}

@@ -41,16 +41,15 @@ const Footer = () => {
                     </div>
                     <div className="mb-6 lg:mb-0 lg:w-1/4 lg:mr-10">
                         <h2 className="text-lg font-semibold">Contact Us</h2>
-                        <p className="mt-4 text-gray-400">123 Street, City, State, Country</p>
-                        <p className="mt-2 text-gray-400">Email: xxxx@yy.com</p>
-                        <p className="mt-2 text-gray-400">Phone: (123) 456-7890</p>
+                        <p className="mt-4 text-gray-400">virtual office</p>
+                        <p className="mt-2 text-gray-400">Email: thepratidinonline@gmail.com</p>
+                        <p className="mt-2 text-gray-400">Phone: n/a</p>
                     </div>
                     <div className="lg:w-1/4">
                         <h2 className="text-lg font-semibold">Follow Us</h2>
                         <ul className="mt-4 flex space-x-5">
-                            <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i className="fab fa-instagram"></i></a></li>
+                            <li><a href="https://www.facebook.com/thepratidin"><i className="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.instagram.com/thepratidin"><i className="fab fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
